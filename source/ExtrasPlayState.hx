@@ -46,7 +46,7 @@ class ExtrasPlayState extends MusicBeatState
 
 	override function create()
 	{
-		var initSonglist = CoolUtil.coolTextFile(Paths.txt('freeplaySonglistx'));
+		var initSonglist = CoolUtil.coolTextFile(Paths.txt('z_lists/fpExtralist'));
 
 		for (i in 0...initSonglist.length)
 		{
@@ -417,24 +417,20 @@ class ExtrasPlayState extends MusicBeatState
 		
 		diffText.text = CoolUtil.difficultyFromInt(curDifficulty).toUpperCase();
 
-		var clr = 0xFFE51F89;
+		var clr = 0xFF000099;
 		switch (curSelected)
 		{
 			case 1:
 				clr = FlxColor.GRAY;
 			case 2:
-				clr = FlxColor.LIME;
-			case 3:
-				clr = FlxColor.RED;
-			case 4:
 				clr = FlxColor.BLACK;
-			case 5:
-				clr = FlxColor.YELLOW;
-			case 6:
+			case 3:
+				clr = FlxColor.GRAY;
+			case 4:
 				clr = FlxColor.BLUE;
-			case 7:
+			case 5:
 				clr = FlxColor.RED;
-			case 8:
+			case 6:
 				clr = FlxColor.BLACK;
 		}
 		

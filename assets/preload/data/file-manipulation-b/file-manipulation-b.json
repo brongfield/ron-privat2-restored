@@ -1,7 +1,7 @@
 {
 	"song": {
-		"player1": "bf",
-		"gfVersion": "gf",
+		"player1": "bf-b",
+		"gfVersion": "gf-b",
 		"notes": [
 			{
 				"sectionNotes": [],
@@ -7343,7 +7343,7 @@
 				]
 			]
 		],
-		"player2": "ron-usb",
+		"player2": "ron-usb-b",
 		"player3": null,
 		"splashSkin": "noteSplashes",
 		"song": "File-Manipulation-b",

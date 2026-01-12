@@ -1,3 +1,23 @@
+# Charting Credits for restored mod: *
+
+# splash/splashee/tailsfan25: *
+ron-b
+bloodshed-b-oldest
+file-manipulation-b-old
+factory-reset
+raw-meaty-meats
+steak
+uncooked-meat
+redirection
+pretty-wacky
+typical-dessecration/atypical
+admin
+homicidal-lunacy
+
+# realbrongfield (me): *
+omnipresent
+recycle-bin
+
 # VS Ron V2.5 *still wip page*
 
 ![ron](https://static.wikia.nocookie.net/fridaynightfunking/images/1/1f/RonAnim.gif/revision/latest/scale-to-width-down/341?cb=20210723183443)

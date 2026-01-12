@@ -46,7 +46,7 @@ class BSidePlayState extends MusicBeatState
 
 	override function create()
 	{
-		var initSonglist = CoolUtil.coolTextFile(Paths.txt('freeplaySonglistb'));
+		var initSonglist = CoolUtil.coolTextFile(Paths.txt('z_lists/fpBsidelist'));
 
 		for (i in 0...initSonglist.length)
 		{

@@ -226,9 +226,21 @@ class MasterPlayState extends MusicBeatState
 				case 0:
 					FlxG.switchState(new NormalPlayState());
 				case 1:
-					FlxG.switchState(new BSidePlayState());
+					FlxG.switchState(new CookPlayState());
 				case 2:
+					FlxG.switchState(new ShuttlePlayState());
+				case 3:
+					FlxG.switchState(new BijuuPlayState());
+				case 4:
+					FlxG.switchState(new DavePlayState());
+				case 5:
+					FlxG.switchState(new DoynhePlayState());
+				case 6:
 					FlxG.switchState(new ExtrasPlayState());
+				case 7:
+					FlxG.switchState(new InfernalPlayState());
+				case 8:
+					FlxG.switchState(new OldPlayState());
 			}
 		}
 	}
@@ -311,6 +323,8 @@ class MasterPlayState extends MusicBeatState
 				clr = FlxColor.MAGENTA;
 			case 7:
 				clr = FlxColor.BLACK;
+			case 8:
+				clr = FlxColor.BROWN;
 		}
 		
 		if(clr != intendedColor) {
