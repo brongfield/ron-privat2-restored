@@ -410,6 +410,8 @@ class PlayState extends MusicBeatState
 			iconsong = 'bloodshed';
 		if (SONG.song.toLowerCase() == 'trojan-virus')
 			iconsong = 'trojan';
+		if (SONG.song.toLowerCase() == 'recycle-bin')
+			iconsong = 'trojan';
 		if (SONG.song.toLowerCase() == 'file-manipulation')
 			iconsong = 'trojan';
 		if (SONG.song.toLowerCase() == 'atelophobia')
@@ -3541,7 +3543,7 @@ class PlayState extends MusicBeatState
 			}*/
 			
 			//hacky fix but whatever
-			if ((curSong != 'Trojan-Virus') || (curSong != 'File-Manipulation'))
+			if ((curSong != 'Trojan-Virus') || (curSong != 'Recycle-Bin') || (curSong != 'File-Manipulation'))
 			{
 				FlxG.camera.angle = luaModchart.getVar('cameraAngle', 'float');
 				camHUD.angle = luaModchart.getVar('camHudAngle','float');
@@ -6393,6 +6395,8 @@ class PlayState extends MusicBeatState
 					{
 						case 'File-Manipulation':
 							setChrome(chromeOffset*FlxG.save.data.rgbintense);
+						case 'Recycle-Bin':
+							// nothing happens
 						default:
 							var sinus = 1;
 							if (curStep >= 538)
@@ -6566,14 +6570,31 @@ class PlayState extends MusicBeatState
 			camHUD.shake(0.00125, 0.15);
 		}
 		if (curSong == 'bijuu')
+		{
+			switch (curStep)
 			{
-				switch (curStep)
-				{
-					case 105:
-						defaultCamZoom = 0.8;
-						
-				}
+				case 105:
+					defaultCamZoom = 0.8;
+					
 			}
+		}
+		if (curSong == 'Recycle-Bin')
+		{
+			trace("hi");
+			switch (curStep)
+			{
+				case 512:
+					trace("RB shader applied");
+					camGame.alpha = 1;
+					FlxG.camera.setFilters([ShadersHandler.MosaicShader]);
+					camHUD.setFilters([ShadersHandler.MosaicShader]);
+				case 768:
+					camGame.alpha = 1;
+					FlxG.camera.setFilters([ShadersHandler.chromaticAberration]);
+					camHUD.setFilters([ShadersHandler.chromaticAberration]);
+					trace("hi");
+			}
+		}
 		if (curSong == 'File-Manipulation')
 		{
 			switch (curStep) {
@@ -6606,7 +6627,8 @@ class PlayState extends MusicBeatState
 					FlxTween.tween(FlxG.camera, {angle: 359.99}, 0.5, {ease: FlxEase.expoOut,});
 				case 562:
 					FlxTween.cancelTweensOf(FlxG.camera);
-					FlxG.camera.angle = 0;					defaultCamZoom = 0.88;
+					FlxG.camera.angle = 0;
+					defaultCamZoom = 0.88;
 				case 816|820|824|828|848|852|856|880|884|888|892|912|916|920|924:
 					FlxG.camera.angle = 5;
 					defaultCamZoom += 0.0125;
@@ -6638,19 +6660,6 @@ class PlayState extends MusicBeatState
 				
 			if ((curStep >= 1312))
 				windowSpawn();
-		}
-		if (curSong == 'Recycle-Bin')
-		{
-			switch (curStep) {
-				case 512:
-					camGame.alpha = 1;
-					FlxG.camera.setFilters([ShadersHandler.MosaicShader]);
-					camHUD.setFilters([ShadersHandler.MosaicShader]);
-				case 768:
-					camGame.alpha = 1;
-					FlxG.camera.setFilters([ShadersHandler.chromaticAberration]);
-					camHUD.setFilters([ShadersHandler.chromaticAberration]);
-			}
 		}
 		if (curSong == 'File-Manipulation-b')
 		{
@@ -6989,7 +6998,6 @@ class PlayState extends MusicBeatState
 			if (curStep == 402)
 				boyfriend.playAnim('firstDeath');
 		}
-
 		super.stepHit();
 		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20)
 		{
