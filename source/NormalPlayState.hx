@@ -109,8 +109,6 @@ class NormalPlayState extends MusicBeatState
 			if (!FlxG.sound.music.playing)
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 		}
-		if (FlxG.sound.music == null)
-			FlxG.sound.playMusic(Paths.music('freakyMenu'));
 
 		#if windows
 		// Updating Discord Rich Presence

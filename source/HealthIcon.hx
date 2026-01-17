@@ -145,6 +145,7 @@ class HealthIcon extends FlxSprite
 		}
 		else if (usesIconGrid4(char))
 		{
+			animation.add('whitty', [56, 57], 0, false, isPlayer);
 			animation.add('blue', [56, 57], 0, false, isPlayer);
 			animation.add('blueSad', [56, 57], 0, false, isPlayer);
 			animation.add('bf_Gray', [60, 61], 0, false, isPlayer);
@@ -197,7 +198,7 @@ class HealthIcon extends FlxSprite
 			'ronPower','ron-usb','ateloron','factorytankman',
 			'ronb','ron-b','ronangry-b','ron-angry-b','ronmad-b','ron-mad-b','hellron-b','hellron-2',
 			'ronPower-b','ron-usb-b','tankmantrojan-2','ateloron-b','factorytankman-2',
-			'bijuuron-old','hellron-pov','ronslaught-pov','demonron-new','devilron','douyhe','hatedouyhe','hatedouyhe-old','douyhe-old','helldouyhe','dave','bambi','ronDave','chezburgir','Gray_BF',
+			'bijuuron-old','hellron-pov','ronslaught-pov','demonron-new','devilron','devilron-old','douyhe','hatedouyhe','hatedouyhe-old','douyhe-old','helldouyhe','dave','bambi','ronDave','chezburgir','Gray_BF',
 			'oldbf','oldron','ronsip','oldron-mad','oldhellron','oldateloron','oldron-usb','ronPower-old',
 			'oldfactorytankman','oldronb','oldronmad-b','oldhellron-b','oldateloron-b','hellron-2-old',
 			'oldron-usb-b','oldfactorytankman-b','oldtankmantrojan-2','oldfactorytankman-2','oldhellron-2'
@@ -212,7 +213,7 @@ class HealthIcon extends FlxSprite
 	private function usesIconGrid4(char:String):Bool
 	{
 		return [
-			'blue','ronusb-transform','ronusb-transform-b','blueSad','meri','bf_Gray','bf-g','armand','himdrip','gron','bijuuron','napkin','cookron','bfshuttle-man-playable','weedron','shuttleron','rondvd','admin','dave'
+			'blue','whitty','ronusb-transform','ronusb-transform-b','blueSad','meri','bf_Gray','bf-g','armand','himdrip','gron','bijuuron','napkin','cookron','bfshuttle-man-playable','weedron','shuttleron','rondvd','admin','dave'
 		].indexOf(char) != -1;
 	}
 	private function usesIconGridcookbob(char:String):Bool
