@@ -41,7 +41,7 @@ also some notes if you're playing the game:
 4. to access antipiracy song, press "a" on the title screen (before main menu) and spam any key or multiple keys until you get to the loading screen.
 5. while on title screen, if you press "s", you can skip the warnings and disclaimers.
 6. the oh-god-oh-fuck song is old antipiracy from the demo's old builds in source code.
-7. there are actually a couple of demo-only things, all of which i've ported over to the main build for a complete experience of ron 2.5.
+7. there are actually a couple of demo-only things, all of which (everything other than dialogue), i've ported over to the main build for a complete experience of ron 2.5.
 8. to access bsides in main freeplay, just keep scrolling difficulties until you reach flip difficulty.
 9. to access bleeding in main freeplay, just use cool difficulty and scroll to where bloodshed would be on any other difficulty (to where bloodshed-b would be in flip aswell).
 
