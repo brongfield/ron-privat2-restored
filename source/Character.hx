@@ -436,7 +436,7 @@ class Character extends FlxSprite
 
 				flipX = true;
 				flipX = true;
-			case 'douyhe':
+			case 'douyhe'|'hatedouyhe':
 				tex = Paths.getSparrowAtlas('memes/doyne');
 				frames = tex;
 				animation.addByPrefix('idle', "idle", 24);
@@ -451,47 +451,7 @@ class Character extends FlxSprite
 				addOffset("singDOWN", 25, -60);
 				playAnim('idle');
 				
-			case 'hatedouyhe':
-				tex = Paths.getSparrowAtlas('memes/doyne');
-				frames = tex;
-				animation.addByPrefix('idle', "idle", 24);
-				animation.addByPrefix('singUP', 'up', 24, false);
-				animation.addByPrefix('singDOWN', 'down', 24, false);
-				animation.addByPrefix('singLEFT', 'left', 24, false);
-				animation.addByPrefix('singRIGHT', 'right', 24, false);
-				addOffset('idle');
-				addOffset("singUP", 0, 60);
-				addOffset("singLEFT", 75, 30);
-				addOffset("singRIGHT");
-				addOffset("singDOWN", 25, -60);
-				playAnim('idle');
-				
-			case 'douyhe-old':
-				tex = Paths.getSparrowAtlas('memes/dayne');
-				frames = tex;
-				animation.addByPrefix('idle', 'BF idle dance', 24, false);
-				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
-				animation.addByPrefix('singLEFT', 'BF NOTE LEFT0', 24, false);
-				animation.addByPrefix('singRIGHT', 'BF NOTE RIGHT0', 24, false);
-				animation.addByPrefix('singDOWN', 'BF NOTE DOWN0', 24, false);
-				animation.addByPrefix('singUPmiss', 'BF NOTE UP MISS', 24, false);
-				animation.addByPrefix('singLEFTmiss', 'BF NOTE LEFT MISS', 24, false);
-				animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS', 24, false);
-				animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS', 24, false);
-				animation.addByPrefix('Ugh', 'BF HEY', 24, false);
-				addOffset('idle', -5);
-				addOffset("singUP", -29, 27);
-				addOffset("singRIGHT", 0, -7);
-				addOffset("singLEFT", 12, -6);
-				addOffset("singDOWN", 40, -30);
-				addOffset("singUPmiss", -29, 27);
-				addOffset("singRIGHTmiss", -30, 21);
-				addOffset("singLEFTmiss", 12, 24);
-				addOffset("singDOWNmiss", -11, -19);
-				playAnim('idle');
-				
-				flipX = true;
-			case 'hatedouyhe-old':
+			case 'douyhe-old'|'hatedouyhe-old':
 				tex = Paths.getSparrowAtlas('memes/dayne');
 				frames = tex;
 				animation.addByPrefix('idle', 'BF idle dance', 24, false);
@@ -606,11 +566,11 @@ class Character extends FlxSprite
 			case 'cookron':
 				tex = Paths.getSparrowAtlas('updateron/characters/roncook');
 				frames = tex;
-				animation.addByPrefix('idle', "roncook idle", 24);
-				animation.addByPrefix('singUP', 'roncook up', 24, false);
-				animation.addByPrefix('singDOWN', 'roncook down', 24, false);
-				animation.addByPrefix('singLEFT', 'roncook left', 24, false);
-				animation.addByPrefix('singRIGHT', 'roncook right', 24, false);
+				animation.addByPrefix('idle', "roncook idle", 12);
+				animation.addByPrefix('singUP', 'roncook up', 12, false);
+				animation.addByPrefix('singDOWN', 'roncook down', 12, false);
+				animation.addByPrefix('singLEFT', 'roncook left', 12, false);
+				animation.addByPrefix('singRIGHT', 'roncook right', 12, false);
 				addOffset('idle');
 				addOffset("singUP", 29, 31);
 				addOffset("singLEFT", 40, -20);
@@ -620,16 +580,16 @@ class Character extends FlxSprite
 			case 'hellcookron':
 				tex = Paths.getSparrowAtlas('updateron/characters/roncookassassinate');
 				frames = tex;
-				animation.addByPrefix('idle', "roncook idle", 24);
-				animation.addByPrefix('singUP', 'roncook up', 24, false);
-				animation.addByPrefix('singDOWN', 'roncook down', 24, false);
-				animation.addByPrefix('singLEFT', 'roncook left', 24, false);
-				animation.addByPrefix('singRIGHT', 'roncook right', 24, false);
+				animation.addByPrefix('idle', "roncook idle", 12);
+				animation.addByPrefix('singUP', 'roncook up', 12, false);
+				animation.addByPrefix('singDOWN', 'roncook down', 12, false);
+				animation.addByPrefix('singLEFT', 'roncook left', 12, false);
+				animation.addByPrefix('singRIGHT', 'roncook right', 12, false);
 				addOffset('idle');
-				addOffset("singUP", 29, 31);
-				addOffset("singLEFT", 40, -20);
-				addOffset("singRIGHT", -30, 10);
-				addOffset("singDOWN", 30, -160);
+				addOffset("singUP", -6, 1);
+				addOffset("singLEFT", 22, 2);
+				addOffset("singRIGHT", 67, -33);
+				addOffset("singDOWN", 10, -11);
 				playAnim('idle');
 			case 'ronDave':
 				tex = Paths.getSparrowAtlas('ron/characters/Tankman');
@@ -1211,22 +1171,6 @@ class Character extends FlxSprite
 				addOffset("singRIGHT", -89, -51);
 				addOffset("singDOWN", 40, -120);
 				addOffset("Ugh", 71, -40);
-				playAnim('idle');
-			case 'ronsip':
-				frames = Paths.getSparrowAtlas('ron/characters/kill_yourself', 'shared');
-				animation.addByPrefix('idle', 'RON_IDLE', 24, false);
-				animation.addByPrefix('singUP', 'RON_UP', 24, false);
-				animation.addByPrefix('singDOWN', 'RON_DOWN', 24, false);
-				animation.addByPrefix('singLEFT', 'RON_LEFT', 24, false);
-				animation.addByPrefix('singRIGHT', 'RON_RIGHT', 24, false);
-
-				// addOffset("singDOWN", 160 -180);
-				animOffsets['singDOWN'] = [160, -180];
-				addOffset('idle');
-				addOffset("singUP", -20, -50);
-				addOffset("singRIGHT", -30, -50);
-				addOffset("singLEFT", 600, 220);
-
 				playAnim('idle');
 			case 'ronsip':
 				frames = Paths.getSparrowAtlas('ron/characters/kill_yourself', 'shared');

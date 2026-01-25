@@ -16616,7 +16616,7 @@
 		],
 		"song": "uncooked-meat",
 		"needsVoices": true,
-		"stage": "cook",
+		"stage": "legacyrawextend",
 		"bpm": 240,
 		"speed": 3.4
 	}

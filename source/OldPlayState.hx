@@ -245,10 +245,12 @@ class OldPlayState extends MusicBeatState
 			FlxG.switchState(new MasterPlayState());
 		}
 		
-		if (songs[curSelected].songName == 'BLOODSHED-TWO')
+		if (songs[curSelected].songName == 'BLOODSHED-TWO' || songs[curSelected].songName.toLowerCase() == 'raw' || songs[curSelected].songName.toLowerCase() == 'uncooked-meat' || songs[curSelected].songName.toLowerCase() == 'assassinate')
 		{
 			fdiffText.visible = true;
 			diffText.visible = false;
+			fdiffText.visible = false;
+			diffText.visible = true;
 		}
 		else
 		{
@@ -273,11 +275,11 @@ class OldPlayState extends MusicBeatState
 
 			trace(poop);
 			
-			if (songs[curSelected].songName == 'BLOODSHED-TWO')
+			if (songs[curSelected].songName == 'BLOODSHED-TWO' || songs[curSelected].songName.toLowerCase() == 'raw' || songs[curSelected].songName.toLowerCase() == 'uncooked-meat' || songs[curSelected].songName.toLowerCase() == 'assassinate')
 				PlayState.storyDifficulty = 2;
 			else
 				PlayState.storyDifficulty = curDifficulty;
-				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName);
+			PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName);
 
 			PlayState.isStoryMode = false;
 			PlayState.storyWeek = songs[curSelected].week;
@@ -289,11 +291,17 @@ class OldPlayState extends MusicBeatState
 	function changeDiff(change:Int = 0)
 	{
 		curDifficulty += change;
-
-		if (curDifficulty < 0)
+		if (songs[curSelected].songName.toLowerCase() == 'raw' || songs[curSelected].songName.toLowerCase() == 'uncooked-meat' || songs[curSelected].songName.toLowerCase() == 'assassinate')
+		{
 			curDifficulty = 2;
-		if (curDifficulty > 2)
-			curDifficulty = 0;
+		}
+		else
+		{
+			if (curDifficulty < 0)
+				curDifficulty = 2;
+			if (curDifficulty > 2)
+				curDifficulty = 0;
+		}
 
 		// adjusting the highscore song name to be compatible (changeDiff)
 		var songHighscore = StringTools.replace(songs[curSelected].songName, " ", "-");
@@ -328,10 +336,17 @@ class OldPlayState extends MusicBeatState
 		if (curSelected >= songs.length)
 			curSelected = 0;
 		
-		if (curDifficulty < 0)
+		if (songs[curSelected].songName.toLowerCase() == 'raw' || songs[curSelected].songName.toLowerCase() == 'uncooked-meat' || songs[curSelected].songName.toLowerCase() == 'assassinate')
+		{
 			curDifficulty = 2;
-		if (curDifficulty > 2)
-			curDifficulty = 0;
+		}
+		else
+		{
+			if (curDifficulty < 0)
+				curDifficulty = 2;
+			if (curDifficulty > 2)
+				curDifficulty = 0;
+		}
 			
 		FlxG.camera.antialiasing = true;
 

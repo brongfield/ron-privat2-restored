@@ -308,10 +308,10 @@ class ExtrasPlayState extends MusicBeatState
 		}
 		else
 		{
-			if (curDifficulty < 0)
-				curDifficulty = 3;
-			if (curDifficulty > 3)
-				curDifficulty = 0;
+			if (curDifficulty < 1)
+				curDifficulty = 2;
+			if (curDifficulty > 2)
+				curDifficulty = 1;
 		}
 
 		// adjusting the highscore song name to be compatible (changeDiff)

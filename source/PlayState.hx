@@ -231,6 +231,11 @@ class PlayState extends MusicBeatState
 	var groundt:FlxSprite;
 	var lampt:FlxSprite;
 	var groundover:FlxSprite;
+	var swagBG:FlxSprite;
+	public var curbg:FlxSprite;
+	var sprites:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
+	private var what:FlxTypedGroup<FlxSprite>;
+	var testshader:Shaders.GlitchEffect;
 
 	var fc:Bool = true;
 	var fx:FlxSprite;
@@ -319,6 +324,11 @@ class PlayState extends MusicBeatState
 		"cheeky",
 		"meri"
 	];
+	var weedBG:FlxSprite;
+	var weedG:FlxSprite;
+	var weedShader:ChromaticAberration;
+	var weedTime:Float = 0;
+
 	override public function create()
 	{
 		if (PlayState.storyWeek == 4)
@@ -1061,7 +1071,7 @@ class PlayState extends MusicBeatState
 
 					// Morshu
 					var morshu:FlxSprite = new FlxSprite(-650, 0);
-					morshu.frames = Paths.getSparrowAtlas('updateron/bg/mmm');
+					morshu.frames = Paths.getSparrowAtlas('updateron/characters/mmm');
 					morshu.animation.addByPrefix('idle', 'bop', 24, true);
 					morshu.animation.play('idle');
 					morshu.updateHitbox();
@@ -1070,7 +1080,7 @@ class PlayState extends MusicBeatState
 
 					// Caleb
 					var caleb:FlxSprite = new FlxSprite(900, 0);
-					caleb.frames = Paths.getSparrowAtlas('updateron/bg/ears');
+					caleb.frames = Paths.getSparrowAtlas('updateron/characters/ears');
 					caleb.animation.addByPrefix('idle', 'bop', 24, true);
 					caleb.animation.play('idle');
 					caleb.updateHitbox();
@@ -1299,9 +1309,51 @@ class PlayState extends MusicBeatState
 				bg.scrollFactor.set(0.9, 0.9);
 				add(bg);
 			}
-			case "cook":
+			case 'weed':
 			{
-				var bg:FlxSprite = new FlxSprite(-980.6, -388.4).loadGraphic(Paths.image("updateron/bg/raw"));
+				defaultCamZoom = 0.85;
+				curStage = 'weed';
+
+				weedBG = new FlxSprite();
+				weedBG.loadGraphic(Paths.image('updateron/bg/weed'));
+				weedBG.antialiasing = true;
+
+				var hx = weedBG.width / 2;
+				var hy = weedBG.height / 2;
+				weedBG.offset.set(hx, hy);
+				weedBG.x = -1000 + hx;
+				weedBG.y = -300 + hy;
+
+				add(weedBG);
+
+				weedG = new FlxSprite();
+				weedG.loadGraphic(Paths.image('updateron/bg/weed'));
+				weedG.antialiasing = true;
+
+				var hx = weedG.width / 2;
+				var hy = weedG.height / 2;
+				weedG.offset.set(hx, hy);
+				weedG.x = -1000 + hx;
+				weedG.y = -300 + hy;
+
+				add(weedG);
+
+				weedShader = new ChromaticAberration();
+				FlxG.camera.setFilters([new ShaderFilter(weedShader)]);
+			}
+			case "legacyraw":
+			{
+				var bg:FlxSprite = new FlxSprite(-980.6, -388.4).loadGraphic(Paths.image("updateron/bg/legacyraw"));
+				add(bg);
+			}
+			case "legacyrawextend":
+			{
+				var bg:FlxSprite = new FlxSprite(-980.6, -388.4).loadGraphic(Paths.image("updateron/bg/legacyrawextend"));
+				add(bg);
+			}
+			case "legacyassassinate":
+			{
+				var bg:FlxSprite = new FlxSprite(-980.6, -388.4).loadGraphic(Paths.image("updateron/bg/legacyassassinate"));
 				add(bg);
 			}
 			case "greystage":
@@ -1326,6 +1378,25 @@ class PlayState extends MusicBeatState
 				ground.antialiasing = true;
 				add(ground);
 			}
+			case 'applecore':
+				defaultCamZoom = 0.5;
+				curStage = 'POOP';
+
+				swagBG = new FlxSprite(-600, -200).loadGraphic(Paths.image('updateron/bg/hi'));
+				//swagBG.scrollFactor.set(0, 0);
+				swagBG.scale.set(1.75, 1.75);
+				//swagBG.updateHitbox();
+				testshader = new Shaders.GlitchEffect();
+				testshader.waveAmplitude = 0.1;
+				testshader.waveFrequency = 1;
+				testshader.waveSpeed = 2;
+				swagBG.shader = testshader.shader;
+				sprites.add(swagBG);
+				add(swagBG);
+				curbg = swagBG;
+
+				what = new FlxTypedGroup<FlxSprite>();
+				add(what);
 			default:
 			{
 				defaultCamZoom = 0.9;
@@ -1785,21 +1856,24 @@ class PlayState extends MusicBeatState
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 			case 'cookron':
 				gf.visible = false;
-				dad.scale.set(1.7, 1.7);
+				dad.scale.set(1.6, 1.6);
 				dad.updateHitbox();
-				dad.x += -60;
-				dad.y += 250;
-				boyfriend.y += -150;
+				dad.x = -55;
+				dad.y = 205;
+				boyfriend.x = 744.8;
+				boyfriend.y = 145;
 				camPos.set(dad.getGraphicMidpoint().x + -50, dad.getGraphicMidpoint().y + -60);
 				healthBar.createFilledBar(0xFFFFD800, 0xFFFFFFFF);
 			case 'hellcookron':
-				dad.x += -60;
-				dad.y += 10;
-				camPos.set(dad.getGraphicMidpoint().x + -50, dad.getGraphicMidpoint().y + -60);
+				gf.visible = false;
+				dad.scale.set(1.6, 1.6);
+				dad.updateHitbox();
+				dad.x = 95;
+				dad.y = 205;
+				boyfriend.x = 744.8;
+				boyfriend.y = 145;
+				camPos.set(dad.getGraphicMidpoint().x + -350, dad.getGraphicMidpoint().y + -180);
 				healthBar.createFilledBar(0xFF010101, 0xFFFFFFFF);
-			case 'cookbob':
-				dad.y += -150;
-				camPos.set(dad.getGraphicMidpoint().x + 40, dad.getGraphicMidpoint().y + 60);
 			case 'oldron':
 				dad.x += 70;
 				dad.y += 250;
@@ -2875,8 +2949,6 @@ class PlayState extends MusicBeatState
 							skin = 'bhell';
 						case 'oldron-usb-b':
 							skin = 'bhell';
-						case 'ron-usb-b-old':
-							skin = 'bhell';
 						case 'dave':
 							skin = 'NOTEold_assets';
 						case 'bambi':
@@ -3094,8 +3166,6 @@ class PlayState extends MusicBeatState
 							skin = 'bhell';
 						case 'oldron-usb-b':
 							skin = 'bhell';
-						case 'ron-usb-b-old':
-							skin = 'bhell';
 						case 'dave':
 							skin = 'NOTEold_assets';
 						case 'bambi':
@@ -3305,6 +3375,12 @@ class PlayState extends MusicBeatState
 					credits = 'ArmandRonan';
 				case 'raw':
 					credits = 'ZesCrew2';
+				case 'cartified-champion':
+					credits = 'Gangster Spongebob';
+				case 'rong-aisle':
+					credits = 'DragonFlame42';
+				case 'weed':
+					credits = 'Gangster Spongebob';
 			}
 			var rSongname = curSong;
 			if (rSongname.toLowerCase().endsWith('-b'))
@@ -4585,6 +4661,25 @@ class PlayState extends MusicBeatState
 		if (FlxG.keys.justPressed.ONE)
 			endSong();
 		#end
+		if (curStage == 'weed')
+		{
+			weedTime += elapsed;
+
+			weedBG.scale.x = 1 + Math.cos(weedTime) / 4;
+			weedBG.scale.y = 1 + Math.cos(weedTime + 1) / 4;
+
+			var strength = 0.0012;
+			weedShader.rOffset.value = [Math.sin(weedTime * 2) * strength];
+			weedShader.gOffset.value = [Math.cos(weedTime * 2) * strength];
+			weedShader.bOffset.value = [Math.sin(weedTime * 3) * strength];
+
+			var songPos:Float = Conductor.songPosition;
+			var currentBeat:Float = (songPos / 5000) * (Conductor.bpm / 60);
+
+			dad.y = -100 - 150 * Math.sin((currentBeat + 144) * Math.PI);
+		}
+		if (testshader != null)
+			testshader.update(elapsed);
 	}
 
 	function endSong():Void
@@ -6867,7 +6962,6 @@ class PlayState extends MusicBeatState
 				case 532: FlxTween.cancelTweensOf(FlxG.camera);
 				case 535: FlxTween.tween(FlxG.camera, {zoom: 0.8}, 2);
 				case 545: FlxTween.cancelTweensOf(FlxG.camera);
-				case 544: camHUD.visible = true;
 				case 560: defaultCamZoom = 1;
 				case 563: defaultCamZoom = 0.88;
 				case 538:
@@ -6879,7 +6973,7 @@ class PlayState extends MusicBeatState
 					add(dad);
 					iconP2.animation.play('ateloron');
 					ronAnimation.visible = false;
-				case 544: camHUD.visible = true;
+					camHUD.visible = true;
 				case 556:
 					defaultCamZoom = 0.58;
 					FlxTween.tween(FlxG.camera, {angle: 359.99}, 0.5, {ease: FlxEase.expoOut,});
@@ -6924,15 +7018,15 @@ class PlayState extends MusicBeatState
 			switch (curStep)
 			{
 				case 383:
-					normalcharacterchange('neil');
+					normalcharacterchange('bandu');
 				case 543:
 					normalcharacterchange('factorytankman');
 				case 639:
-					normalcharacterchange('neil');
+					normalcharacterchange('bandu');
 				case 1215:
 					normalcharacterchange('dave');
 				case 1231:
-					normalcharacterchange('neil');
+					normalcharacterchange('bandu');
 				case 1262:
 					normalcharacterchange('factorytankman');
 				case 1280:
@@ -6940,7 +7034,7 @@ class PlayState extends MusicBeatState
 				case 1408:
 					normalcharacterchange('factorytankman');
 				case 1567:
-					normalcharacterchange('neil');
+					normalcharacterchange('bandu');
 				case 1823:
 					normalcharacterchange('dave');
 			}
@@ -6966,7 +7060,7 @@ class PlayState extends MusicBeatState
 				case 1416:
 					normalcharacterchange('blueSad');
 				case 1423:
-					normalcharacterchange('neil');
+					normalcharacterchange('bandu');
 				case 1551:
 					normalcharacterchange('factorytankman-old');
 				case 1983:
@@ -7350,11 +7444,15 @@ class PlayState extends MusicBeatState
 					gf.alpha = 1;
 			}
 		}
-
 		if (curSong.toLowerCase() == 'defecation')
 		{
 			if (curStep == 402)
 				boyfriend.playAnim('firstDeath');
+		}
+		if (curSong.toLowerCase() == 'rong-aisle')
+		{
+			if (curStep == 1349)
+				normalcharacterchange('neil');
 		}
 		super.stepHit();
 		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20)

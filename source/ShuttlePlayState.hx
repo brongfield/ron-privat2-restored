@@ -362,10 +362,10 @@ class ShuttlePlayState extends MusicBeatState
 		if (curSelected >= songs.length)
 			curSelected = 0;
 		
-		if (curDifficulty < 0)
-			curDifficulty = 3;
-		if (curDifficulty > 3)
-			curDifficulty = 0;
+		if (curDifficulty < 1)
+			curDifficulty = 1;
+		if (curDifficulty > 1)
+			curDifficulty = 1;
 		
 		FlxG.camera.antialiasing = true;
 

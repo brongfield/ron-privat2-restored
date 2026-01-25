@@ -28,11 +28,11 @@ Factory-Reset-Oldest:factorytankman-old:2
 Raw:cookron:3
 Uncooked-Meat:cookron:3
 Assassinate:hellcookron:3
-Bijuu-Old:ronsip:5
+Bijuu-Old:bijuuron-old:5
 Holy-Shit-Dave-FNF-Old:dave:4
 Slammed-Old:bambi-new:4
 Frosting-Over-Old:bambi-new:4
-Pretty-Wacky-Old:douyhe-old:5
-He-Hates-Me-Old:hatedouyhe-old:5
-Atypical:helldouyhe:5
+Pretty-Wacky-Old:douyhe-old:6
+He-Hates-Me-Old:hatedouyhe-old:6
+Atypical:helldouyhe:6
 Oh-God-Oh-Fuck:hacker:9
