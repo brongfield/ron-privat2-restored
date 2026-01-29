@@ -423,7 +423,7 @@ class CookPlayState extends MusicBeatState
 			case 1:
 				clr = FlxColor.YELLOW;
 			case 2:
-				clr = FlxColor.BLACK;
+				clr = FlxColor.YELLOW;
 			case 3:
 				clr = FlxColor.YELLOW;
 			case 4:
