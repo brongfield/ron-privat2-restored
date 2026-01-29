@@ -3,7 +3,3 @@ Ron:ron:1
 Wasted:ron-angry:1
 Ayo:ron-mad:1
 Bleeding:hellron:1
-Trojan-Virus:ronPower:2
-Recycle-bin:ron-usb:2
-File-Manipulation:ateloron:2
-Factory-Reset:factorytankman:2

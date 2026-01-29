@@ -29,6 +29,8 @@ class HealthIcon extends FlxSprite
 			loadGraphic(Paths.image('icon-tricky'), true, 150, 150);
 		else if (usesIconGridcheeky(char))
 			loadGraphic(Paths.image('icon-cheeky'), true, 150, 150);
+		else if (usesIconGridGapple(char))
+			loadGraphic(Paths.image('iconGridGapple'), true, 150, 150);
 		else
 			loadGraphic(Paths.image('iconGrid2'), true, 150, 150);
 
@@ -61,6 +63,10 @@ class HealthIcon extends FlxSprite
 		else if (usesIconGridcheeky(char))
 		{
 			animation.add('cheeky', [25, 25], 0, false, isPlayer);
+		}
+		else if (usesIconGridGapple(char))
+		{
+			animation.add('bandu', [8, 9], 0, false, isPlayer);
 		}
 		else if (usesIconGrid3(char))
 		{
@@ -161,7 +167,6 @@ class HealthIcon extends FlxSprite
 			animation.add('shuttleron', [70, 71], 0, false, isPlayer);
 			animation.add('rondvd', [72, 73], 0, false, isPlayer);
 			animation.add('admin', [94, 94], 0, false, isPlayer);
-			animation.add('dave', [58, 59], 0, false, isPlayer);
 			animation.add('ronusb-transform', [14, 15], 0, false, isPlayer);
 			animation.add('ronusb-transform-b', [34, 35], 0, false, isPlayer);
 			animation.add('meri', [85, 86], 0, false, isPlayer);
@@ -213,7 +218,7 @@ class HealthIcon extends FlxSprite
 	private function usesIconGrid4(char:String):Bool
 	{
 		return [
-			'blue','whitty','ronusb-transform','ronusb-transform-b','blueSad','meri','bf_Gray','bf-g','armand','himdrip','gron','bijuuron','napkin','cookron','bfshuttle-man-playable','weedron','shuttleron','rondvd','admin','dave'
+			'blue','whitty','ronusb-transform','ronusb-transform-b','blueSad','meri','bf_Gray','bf-g','armand','himdrip','gron','bijuuron','napkin','cookron','bfshuttle-man-playable','weedron','shuttleron','rondvd','admin',
 		].indexOf(char) != -1;
 	}
 	private function usesIconGridcookbob(char:String):Bool
@@ -244,6 +249,12 @@ class HealthIcon extends FlxSprite
 	{
 		return [
 			'cheeky'
+		].indexOf(char) != -1;
+	}
+	private function usesIconGridGapple(char:String):Bool
+	{
+		return [
+			'bandu'
 		].indexOf(char) != -1;
 	}
 	private function usesIconGridneil(char:String):Bool

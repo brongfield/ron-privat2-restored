@@ -31,6 +31,8 @@ omnipresent
 
 recycle-bin
 
+assassination
+
 
 # OTHER CHARTS THAT WERENT CREDITED IS CHARTED BY THE OFFICIAL DEVS AND SOME CHARTS ARE MODDED BY ME (realbrongfield) TO FIX GLITCHED NOTES (glitched notes are notes that when pressed gives score and rating but still scrolls until missed) (also some of these glitched notes might still not be patched)
 

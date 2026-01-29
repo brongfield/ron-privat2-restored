@@ -1584,7 +1584,7 @@ class Character extends FlxSprite
 				addOffset("singLEFT", -10, 10);
 				playAnim('idle');
 			case 'bandu':
-				frames = Paths.getSparrowAtlas('updateron/characters/bandu');
+				frames = Paths.getSparrowAtlas('updateron/cachecharacters/bandu');
 				
 				animation.addByPrefix('idle', 'idle', 24, true);
 				animation.addByPrefix('singUP', 'up', 24, false);
