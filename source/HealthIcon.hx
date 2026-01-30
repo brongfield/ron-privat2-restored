@@ -23,6 +23,8 @@ class HealthIcon extends FlxSprite
 			loadGraphic(Paths.image('icon-roncookassassinate'), true, 150, 150);
 		else if (usesIconGridshaggy(char))
 			loadGraphic(Paths.image('icon-shaggy'), true, 150, 150);
+		else if (usesIconGridpshaggy(char))
+			loadGraphic(Paths.image('icon-pshaggy'), true, 150, 150);
 		else if (usesIconGridneil(char))
 			loadGraphic(Paths.image('icon-neil'), true, 150, 150);
 		else if (usesIconGridtricky(char))
@@ -51,6 +53,10 @@ class HealthIcon extends FlxSprite
 		else if (usesIconGridshaggy(char))
 		{
 			animation.add('shaggy', [0, 1], 0, false, isPlayer);
+		}
+		else if (usesIconGridpshaggy(char))
+		{
+			animation.add('pshaggy', [0, 1], 0, false, isPlayer);
 		}
 		else if (usesIconGridneil(char))
 		{
@@ -237,6 +243,12 @@ class HealthIcon extends FlxSprite
 	{
 		return [
 			'shaggy'
+		].indexOf(char) != -1;
+	}
+	private function usesIconGridpshaggy(char:String):Bool
+	{
+		return [
+			'pshaggy'
 		].indexOf(char) != -1;
 	}
 	private function usesIconGridtricky(char:String):Bool

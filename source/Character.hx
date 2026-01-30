@@ -1882,6 +1882,31 @@ class Character extends FlxSprite
 				addOffset("singRIGHT", -1, -38);
 				addOffset("singUP", -16, 27);
 				playAnim('idle');
+			case 'pshaggy':
+				tex = Paths.getSparrowAtlas('updateron/characters/pshaggy');
+				frames = tex;
+				animation.addByPrefix('singDOWN', 'pshaggy_down', 30, false);
+				animation.addByPrefix('idle', "pshaggy_idle0", 30);
+				animation.addByPrefix('singLEFT', 'pshaggy_left', 30, false);
+				animation.addByPrefix('singRIGHT', 'pshaggy_right', 30, false);
+				animation.addByPrefix('singUP', 'pshaggy_up0', 30, false);
+				animation.addByPrefix('snap', 'pshaggy_snap', 7, false);
+				animation.addByPrefix('snapped', 'pshaggy_did_snap', 28, false);
+				animation.addByPrefix('back', 'pshaggy_back', 28, false);
+				animation.addByPrefix('smile', 'shaggy_smile', 7, false);
+				animation.addByPrefix('stand', 'pshaggy_stand', 7, false);
+				
+				addOffset('singDOWN', 200, -110);
+				addOffset("idle");
+				addOffset("singLEFT", 35, 16);
+				addOffset("singRIGHT", 119, -8);
+				addOffset("singUP", 114, 97);
+				addOffset("snap", 10, 92);
+				addOffset("snapped", 0, 71);
+				addOffset("back");
+				addOffset("smile");
+				addOffset("stand");
+				playAnim('idle');
 			case 'tricky':
 				tex = Paths.getSparrowAtlas('updateron/cachecharacters/tricky', 'shared');
 				frames = tex;

@@ -430,6 +430,8 @@ class ExtrasPlayState extends MusicBeatState
 				clr = FlxColor.BLUE;
 			case 5:
 				clr = FlxColor.RED;
+			case 5:
+				clr = FlxColor.PURPLE;
 		}
 		
 		if(clr != intendedColor) {

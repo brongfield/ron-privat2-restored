@@ -90,6 +90,32 @@ class PlayState extends MusicBeatState
 	public static var instance:PlayState = null;
 	public static var SCREWYOU:Bool = false;
 
+	//shaggg
+	var rock:FlxSprite;
+	var gf_rock:FlxSprite;
+	var doorFrame:FlxSprite;
+	var legs:FlxSprite;
+	var shaggyT:FlxTrail;
+	var legT:FlxTrail;
+	var burst:FlxSprite;
+
+	//ass crack
+	var sh_r:Float = 600;
+	var sShake:Float = 0;
+	var ldx:Float = 0;
+	var ldy:Float = 0;
+	var lstep:Float = 0;
+	var legs_in = false;
+	var gf_launched:Bool = false;
+
+	//cutscenxs
+	var cutTime = 0;
+	var sEnding = 'none';
+
+	//ZEPHYRUS vars mask vars
+	var bfControlY:Float = 0;
+	var alterRoute:Int = 0;
+
 	public static var curStage:String = '';
 	public static var SONG:SwagSong;
 	public static var isStoryMode:Bool = false;
@@ -119,7 +145,10 @@ class PlayState extends MusicBeatState
 	public var luigi:Bool = false;
 
 	var halloweenLevel:Bool = false;
-	
+	var godCutEnd:Bool = false;
+	var godMoveBf:Bool = true;
+	var godMoveGf:Bool = false;
+	var godMoveSh:Bool = false;
 	var songLength:Float = 0;
 	var kadeEngineWatermark:FlxText;
 	
@@ -1453,11 +1482,13 @@ class PlayState extends MusicBeatState
 				}
 				case "legacyraw":
 				{
+					defaultCamZoom = 1.0;
 					var bg:FlxSprite = new FlxSprite(-980.6, -388.4).loadGraphic(Paths.image("updateron/bg/legacyraw"));
 					add(bg);
 				}
 				case "legacyrawextend":
 				{
+					defaultCamZoom = 1.0;
 					var bg:FlxSprite = new FlxSprite(-980.6, -388.4).loadGraphic(Paths.image("updateron/bg/legacyrawextend"));
 					add(bg);
 					var bruh:FlxSprite = new FlxSprite();
@@ -1471,6 +1502,7 @@ class PlayState extends MusicBeatState
 				}
 				case "legacyassassinate":
 				{
+					defaultCamZoom = 1.0;
 					var bg:FlxSprite = new FlxSprite(-980.6, -388.4).loadGraphic(Paths.image("updateron/bg/legacyassassinate"));
 					add(bg);
 				}
@@ -1515,6 +1547,107 @@ class PlayState extends MusicBeatState
 
 					what = new FlxTypedGroup<FlxSprite>();
 					add(what);
+				case 'mansion':
+					defaultCamZoom = 0.9;
+					curStage = 'mansion';
+					var bg:FlxSprite = new FlxSprite(-400, -160).loadGraphic(Paths.image('updateron/bg/bg_lemon'));
+					bg.setGraphicSize(Std.int(bg.width * 1.5));
+					bg.antialiasing = true;
+					bg.scrollFactor.set(0.95, 0.95);
+					bg.active = false;
+					add(bg);
+				case 'sky':
+					defaultCamZoom = 0.65;
+					curStage = 'sky';
+
+					var sky = new FlxSprite(-850, -850);
+					sky.frames = Paths.getSparrowAtlas('updateron/bg/god_bg');
+					sky.animation.addByPrefix('sky', "bg", 30);
+					sky.setGraphicSize(Std.int(sky.width * 0.8));
+					sky.animation.play('sky');
+					sky.scrollFactor.set(0.1, 0.1);
+					sky.antialiasing = true;
+					add(sky);
+
+					var bgcloud = new FlxSprite(-850, -1250);
+					bgcloud.frames = Paths.getSparrowAtlas('updateron/bg/god_bg');
+					bgcloud.animation.addByPrefix('c', "cloud_smol", 30);
+					//bgcloud.setGraphicSize(Std.int(bgcloud.width * 0.8));
+					bgcloud.animation.play('c');
+					bgcloud.scrollFactor.set(0.3, 0.3);
+					bgcloud.antialiasing = true;
+					add(bgcloud);
+
+					add(new MansionDebris(300, -800, 'norm', 0.4, 1, 0, 1));
+					add(new MansionDebris(600, -300, 'tiny', 0.4, 1.5, 0, 1));
+					add(new MansionDebris(-150, -400, 'spike', 0.4, 1.1, 0, 1));
+					add(new MansionDebris(-750, -850, 'small', 0.4, 1.5, 0, 1));
+
+					/*
+					add(new MansionDebris(-300, -1700, 'norm', 0.5, 1, 0, 1));
+					add(new MansionDebris(-600, -1100, 'tiny', 0.5, 1.5, 0, 1));
+					add(new MansionDebris(900, -1850, 'spike', 0.5, 1.2, 0, 1));
+					add(new MansionDebris(1500, -1300, 'small', 0.5, 1.5, 0, 1));
+					*/
+
+					add(new MansionDebris(-300, -1700, 'norm', 0.75, 1, 0, 1));
+					add(new MansionDebris(-1000, -1750, 'rect', 0.75, 2, 0, 1));
+					add(new MansionDebris(-600, -1100, 'tiny', 0.75, 1.5, 0, 1));
+					add(new MansionDebris(900, -1850, 'spike', 0.75, 1.2, 0, 1));
+					add(new MansionDebris(1500, -1300, 'small', 0.75, 1.5, 0, 1));
+					add(new MansionDebris(-600, -800, 'spike', 0.75, 1.3, 0, 1));
+					add(new MansionDebris(-1000, -900, 'small', 0.75, 1.7, 0, 1));
+
+					var fgcloud = new FlxSprite(-1150, -2900);
+					fgcloud.frames = Paths.getSparrowAtlas('updateron/bg/god_bg');
+					fgcloud.animation.addByPrefix('c', "cloud_big", 30);
+					//bgcloud.setGraphicSize(Std.int(bgcloud.width * 0.8));
+					fgcloud.animation.play('c');
+					fgcloud.scrollFactor.set(0.9, 0.9);
+					fgcloud.antialiasing = true;
+					add(fgcloud);
+
+					var bg:FlxSprite = new FlxSprite(-400, -160).loadGraphic(Paths.image('updateron/bg/bg_lemon'));
+					bg.setGraphicSize(Std.int(bg.width * 1.5));
+					bg.antialiasing = true;
+					bg.scrollFactor.set(0.95, 0.95);
+					bg.active = false;
+					add(bg);
+
+					var techo = new FlxSprite(0, -20);
+					techo.frames = Paths.getSparrowAtlas('updateron/bg/god_bg');
+					techo.animation.addByPrefix('r', "broken_techo", 30);
+					techo.setGraphicSize(Std.int(techo.frameWidth * 1.5));
+					techo.animation.play('r');
+					techo.scrollFactor.set(0.95, 0.95);
+					techo.antialiasing = true;
+					add(techo);
+
+					gf_rock = new FlxSprite(20, 20);
+					gf_rock.frames = Paths.getSparrowAtlas('updateron/bg/god_bg');
+					gf_rock.animation.addByPrefix('rock', "gf_rock", 30);
+					gf_rock.animation.play('rock');
+					gf_rock.scrollFactor.set(0.8, 0.8);
+					gf_rock.antialiasing = true;
+					add(gf_rock);
+
+					rock = new FlxSprite(20, 20);
+					rock.frames = Paths.getSparrowAtlas('updateron/bg/god_bg');
+					rock.animation.addByPrefix('rock', "rock", 30);
+					rock.animation.play('rock');
+					rock.scrollFactor.set(1, 1);
+					rock.antialiasing = true;
+					add(rock);
+
+					//god eater legs
+					legs = new FlxSprite(-850, -850);
+					legs.frames = Paths.getSparrowAtlas('updateron/characters/pshaggy');
+					legs.animation.addByPrefix('legs', "solo_legs", 30);
+					legs.animation.play('legs');
+					legs.antialiasing = true;
+					legs.updateHitbox();
+					legs.offset.set(legs.frameWidth / 2, 10);
+					legs.alpha = 0;
 				default:
 				{
 					defaultCamZoom = 0.9;
@@ -1577,6 +1710,8 @@ class PlayState extends MusicBeatState
 				curGf = 'gf-gray';
 			case 'gf-in':
 				curGf = 'gf-in';
+			case 'ron':
+				curGf = 'ron';
 			default:
 				curGf = 'gf';
 		}
@@ -1637,9 +1772,12 @@ class PlayState extends MusicBeatState
 
 		if (!PlayStateChangeables.Optimize)
 		{
-			add(gf);
-
 			// Shitty layering but whatev it works LOL
+			if (curStage == 'sky')
+			{
+				add(legs);
+			}
+			add(gf);
 			add(dad);
 			add(boyfriend);
 		}
@@ -1986,11 +2124,11 @@ class PlayState extends MusicBeatState
 				gf.visible = false;
 				dad.scale.set(1.6, 1.6);
 				dad.updateHitbox();
-				dad.x = 95;
-				dad.y = 205;
+				dad.x = -200;
+				dad.y = 150;
 				boyfriend.x = 744.8;
 				boyfriend.y = 145;
-				camPos.set(dad.getGraphicMidpoint().x + -350, dad.getGraphicMidpoint().y + -180);
+				camPos.set(dad.getGraphicMidpoint().x + -170, dad.getGraphicMidpoint().y + -279);
 				healthBar.createFilledBar(0xFF010101, 0xFFFFFFFF);
 			case 'oldron':
 				dad.x += 70;
@@ -2274,6 +2412,12 @@ class PlayState extends MusicBeatState
 			case 'neil':
 				camPos.set(dad.getGraphicMidpoint().x + -120, dad.getGraphicMidpoint().y + 210);
 				healthBar.createFilledBar(0xFFDBDBDB, bfcolor);
+			case 'pshaggy':
+				shaggyT = new FlxTrail(dad, null, 5, 7, 0.3, 0.001);
+				add(shaggyT);
+				legT = new FlxTrail(legs, null, 5, 7, 0.3, 0.001);
+				add(legT);
+				healthBar.createFilledBar(0xFF751114, bfcolor);
 		}
 
 		strumLineNotes.cameras = [camHUD];
@@ -2420,6 +2564,15 @@ class PlayState extends MusicBeatState
 					add(fx);
 					add(blackeffect);
 					startCountdown();
+				case 'heart-attack':
+					sEnding = 'finale end';
+					godCutEnd = true;
+					godMoveGf = true;
+					godMoveSh = true;
+					new FlxTimer().start(1, function(tmr:FlxTimer)
+					{
+						startCountdown();
+					});
 				default:
 					startCountdown();
 			}
@@ -3011,6 +3164,8 @@ class PlayState extends MusicBeatState
 							skin = 'NOTE_assets';
 						case 'hellron':
 							skin = 'ronhell';
+						case 'hellcookron':
+							skin = 'ronhell';
 						case 'hellron-far':
 							skin = 'ronhell';
 						case 'oldhellron':
@@ -3216,90 +3371,92 @@ class PlayState extends MusicBeatState
 						var skin = 'ronsip';
 						switch (dad.curCharacter)
 						{
-						case 'douyhe':
-							skin = 'NOTE_assets';
-						case 'hatedouyhe':
-							skin = 'NOTE_assets';
-						case 'douyhe-old':
-							skin = 'NOTE_assets';
-						case 'hatedouyhe-old':
-							skin = 'NOTE_assets';
-						case 'helldouyhe':
-							skin = 'NOTE_assets';
-						case 'hellron':
-							skin = 'ronhell';
-						case 'hellron-far':
-							skin = 'ronhell';
-						case 'oldhellron':
-							skin = 'ronhell';
-						case 'hacker':
-							skin = 'ronhell';
-						case 'ateloron':
-							skin = 'ronhell';
-						case 'ron-usb':
-							skin = 'ronhell';
-						case 'oldateloron':
-							skin = 'ronhell';
-						case 'oldron-usb':
-							skin = 'ronhell';
-						case 'ron-usb-old':
-							skin = 'ronhell';
-						case 'demonron':
-							skin = 'demonsip';
-						case 'demonron-new':
-							skin = 'demonsip';
-						case 'demonron-old':
-							skin = 'demonsip';
-						case 'gf-b':
-							skin = 'evik';
-						case 'ronb':
-							skin = 'evik';
-						case 'ronmad-b':
-							skin = 'evik';
-						case 'ronangry-b':
-							skin = 'evik';
-						case 'oldronb':
-							skin = 'evik';
-						case 'oldronmad-b':
-							skin = 'evik';
-						case 'oldronangry-b':
-							skin = 'evik';
-						case 'hellron-2':
-							skin = 'bhell';
-						case 'hellron-2-old':
-							skin = 'bhell';
-						case 'ronPower-b':
-							skin = 'bhell';
-						case 'ateloron-b':
-							skin = 'bhell';
-						case 'ron-usb-b':
-							skin = 'bhell';
-						case 'ron-usb-b-old':
-							skin = 'bhell';
-						case 'factorytankman-b':
-							skin = 'bhell';
-						case 'oldhellron-2':
-							skin = 'bhell';
-						case 'oldateloron-b':
-							skin = 'bhell';
-						case 'oldron-usb-b':
-							skin = 'bhell';
-						case 'dave':
-							skin = 'NOTEold_assets';
-						case 'bambi':
-							skin = 'NOTEold_assets';
-						case 'bambi-old':
-							skin = 'NOTEold_assets';
-						case 'ronDave':
-							skin = 'NOTEold_assets';
-						case 'blue':
-							skin = 'NOTE_assets';
-						case 'blueSad':
-							skin = 'NOTE_assets';
-						case 'gron':
-							skin = 'gron_notes';
-						case 'armand':
-							skin = 'NOTE_assets';
+							case 'douyhe':
+								skin = 'NOTE_assets';
+							case 'hatedouyhe':
+								skin = 'NOTE_assets';
+							case 'douyhe-old':
+								skin = 'NOTE_assets';
+							case 'hatedouyhe-old':
+								skin = 'NOTE_assets';
+							case 'helldouyhe':
+								skin = 'NOTE_assets';
+							case 'hellron':
+								skin = 'ronhell';
+							case 'hellcookron':
+								skin = 'ronhell';
+							case 'hellron-far':
+								skin = 'ronhell';
+							case 'oldhellron':
+								skin = 'ronhell';
+							case 'hacker':
+								skin = 'ronhell';
+							case 'ateloron':
+								skin = 'ronhell';
+							case 'ron-usb':
+								skin = 'ronhell';
+							case 'oldateloron':
+								skin = 'ronhell';
+							case 'oldron-usb':
+								skin = 'ronhell';
+							case 'ron-usb-old':
+								skin = 'ronhell';
+							case 'demonron':
+								skin = 'demonsip';
+							case 'demonron-new':
+								skin = 'demonsip';
+							case 'demonron-old':
+								skin = 'demonsip';
+							case 'gf-b':
+								skin = 'evik';
+							case 'ronb':
+								skin = 'evik';
+							case 'ronmad-b':
+								skin = 'evik';
+							case 'ronangry-b':
+								skin = 'evik';
+							case 'oldronb':
+								skin = 'evik';
+							case 'oldronmad-b':
+								skin = 'evik';
+							case 'oldronangry-b':
+								skin = 'evik';
+							case 'hellron-2':
+								skin = 'bhell';
+							case 'hellron-2-old':
+								skin = 'bhell';
+							case 'ronPower-b':
+								skin = 'bhell';
+							case 'ateloron-b':
+								skin = 'bhell';
+							case 'ron-usb-b':
+								skin = 'bhell';
+							case 'ron-usb-b-old':
+								skin = 'bhell';
+							case 'factorytankman-b':
+								skin = 'bhell';
+							case 'oldhellron-2':
+								skin = 'bhell';
+							case 'oldateloron-b':
+								skin = 'bhell';
+							case 'oldron-usb-b':
+								skin = 'bhell';
+							case 'dave':
+								skin = 'NOTEold_assets';
+							case 'bambi':
+								skin = 'NOTEold_assets';
+							case 'bambi-old':
+								skin = 'NOTEold_assets';
+							case 'ronDave':
+								skin = 'NOTEold_assets';
+							case 'blue':
+								skin = 'NOTE_assets';
+							case 'blueSad':
+								skin = 'NOTE_assets';
+							case 'gron':
+								skin = 'gron_notes';
+							case 'armand':
+								skin = 'NOTE_assets';
 						}
 						
 						if (force)
@@ -4986,8 +5143,125 @@ class PlayState extends MusicBeatState
 				}
 			}
 		}
-	}
+		if(curStage == 'sky')
+		{
+			var rotRate = curStep * 0.25;
+			var rotRateSh = curStep / 9.5;
+			var rotRateGf = curStep / 9.5 / 4;
+			var derp = 12;
+			if (!startedCountdown)
+			{
+				camFollow.x = boyfriend.x - 300;
+				camFollow.y = boyfriend.y - 40;
+				derp = 20;
+			}
 
+			if (godCutEnd)
+			{
+				if (curBeat < 32)
+				{
+					sh_r = 60;
+				}
+				else if ((curBeat >= 140 * 4) || (curBeat >= 50 * 4 && curBeat <= 58 * 4))
+				{
+					sh_r += (60 - sh_r) / 32;
+				}
+				else
+				{
+					sh_r = 600;
+				}
+				if (curBeat < 58*4)
+				{
+				}
+				else if (curBeat < 74 * 4)
+				{
+					rotRateSh *= 1.2;
+				}
+				else if (curBeat < 124 * 4)
+				{
+				}
+				else if (curBeat < 140 * 4)
+				{
+					rotRateSh *= 1.2;
+				}
+				var bf_toy = -2000 + Math.sin(rotRate) * 20 + bfControlY;
+				var sh_toy = -2450 + -Math.sin(rotRateSh * 2) * sh_r * 0.45;
+				var sh_tox = -330 -Math.cos(rotRateSh) * sh_r;
+				var gf_tox = 100 + Math.sin(rotRateGf) * 200;
+				var gf_toy = -2000 -Math.sin(rotRateGf) * 80;
+				if (godMoveBf)
+				{
+					boyfriend.y += (bf_toy - boyfriend.y) / derp;
+					rock.x = boyfriend.x - 200;
+					rock.y = boyfriend.y + 200;
+					rock.alpha = 1;
+					if (true)//(!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
+					{
+						if (FlxG.keys.pressed.UP && bfControlY > 0)
+						{
+							bfControlY --;
+						}
+						if (FlxG.keys.pressed.DOWN && bfControlY < 2290)
+						{
+							trace(bfControlY);
+							bfControlY ++;
+							if (bfControlY >= 400)
+							{
+								alterRoute = 1;
+							}
+						}
+					}
+				}
+				if (godMoveSh)
+				{
+					dad.x += (sh_tox - dad.x) / 12;
+					dad.y += (sh_toy - dad.y) / 12;
+					if (dad.animation.name == 'idle')
+					{
+						var pene = 0.07;
+						dad.angle = Math.sin(rotRateSh) * sh_r * pene / 4;
+
+						legs.alpha = 1;
+						legs.angle = Math.sin(rotRateSh) * sh_r * pene;// + Math.cos(curStep) * 5;
+
+						legs.x = dad.x + 120 + Math.cos((legs.angle + 90) * (Math.PI/180)) * 150;
+						legs.y = dad.y + 300 + Math.sin((legs.angle + 90) * (Math.PI/180)) * 150;
+					}
+					else
+					{
+						dad.angle = 0;
+						legs.alpha = 0;
+					}
+					legT.visible = true;
+					if (legs.alpha == 0)
+						legT.visible = false;
+				}
+				if (godMoveGf)
+				{
+					gf.x += (gf_tox - gf.x) / derp;
+					gf.y += (gf_toy - gf.y) / derp;
+	
+					gf_rock.x = gf.x + -100;
+					gf_rock.y = gf.y + 350;
+					gf_rock.alpha = 1;
+					if (!gf_launched)
+					{
+						gf.scrollFactor.set(0.8, 0.8);
+						gf.setGraphicSize(Std.int(gf.width * 0.8));
+						gf_launched = true;
+					}
+				}
+			}
+			if (!godCutEnd || !godMoveBf)
+			{
+				rock.alpha = 0;
+			}
+			if (!godMoveGf)
+			{
+				gf_rock.alpha = 0;
+			}
+		}
+	}
 	function endSong():Void
 	{
 
