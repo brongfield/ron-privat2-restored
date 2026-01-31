@@ -267,6 +267,7 @@ class PlayState extends MusicBeatState
 	public var gate:FlxSprite;
 	public var stageFront:FlxSprite;
 	public var bg:FlxSprite;
+	public var bgmansion:FlxSprite;
 	public var normalground:FlxSprite;
 	var sprites:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
 	private var what:FlxTypedGroup<FlxSprite>;
@@ -1197,6 +1198,12 @@ class PlayState extends MusicBeatState
 					Estatic2.screenCenter();
 					Estatic2.alpha = 0;
 
+					bgmansion = new FlxSprite(-100, 0).loadGraphic(Paths.image('updateron/bg/bg_lemon'));
+					bg.setGraphicSize(Std.int(bg.width * 1.5));
+					bg.antialiasing = true;
+					bg.scrollFactor.set(0.95, 0.95);
+					bg.active = false;
+
 					add(bg);
 					add(popup);
 					add(lamp);
@@ -1219,6 +1226,8 @@ class PlayState extends MusicBeatState
 					stageFront.alpha = 0;
 					add(bruh);
 					bruh.alpha = 0;
+					add(bgmansion);
+					bgmansion.alpha = 0;
 				}
 				case 'daveHouse':
 				{
@@ -7811,8 +7820,15 @@ class PlayState extends MusicBeatState
 			{
 				case 3647:
 					normalcharacterchange('shaggy');
+					yyyy = dad.y;
+					dad.y = 150;
+					bgmansion.alpha = 1;
+					defaultCamZoom = 0.9;
 				case 3904:
 					normalcharacterchange('factorytankman-b');
+					dad.y = yyyy;
+					bgmansion.alpha = 0;
+					defaultCamZoom = 0.7;
 			}
 		}
 		if (curSong == 'File-Manipulation-b')

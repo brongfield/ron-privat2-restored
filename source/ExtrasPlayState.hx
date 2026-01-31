@@ -301,10 +301,10 @@ class ExtrasPlayState extends MusicBeatState
 
 		if (songs[curSelected].songName.contains("-b"))
 		{
-			if (curDifficulty < 0)
+			if (curDifficulty < 1)
 				curDifficulty = 2;
 			if (curDifficulty > 2)
-				curDifficulty = 0;
+				curDifficulty = 1;
 		}
 		else
 		{
@@ -362,10 +362,10 @@ class ExtrasPlayState extends MusicBeatState
 		if (curSelected >= songs.length)
 			curSelected = 0;
 		
-		if (curDifficulty < 0)
-			curDifficulty = 3;
-		if (curDifficulty > 3)
-			curDifficulty = 0;
+		if (curDifficulty < 1)
+			curDifficulty = 2;
+		if (curDifficulty > 2)
+			curDifficulty = 1;
 		
 		FlxG.camera.antialiasing = true;
 

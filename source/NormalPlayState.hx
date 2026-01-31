@@ -51,18 +51,15 @@ class NormalPlayState extends MusicBeatState
 
 	function reloadSongList(newList:Array<FreeplayState.SongMetadata>)
 	{
-	// Remove old icons
-	for (i in 0...iconArray.length)
-		remove(iconArray[i]);
-	iconArray = [];
+		var oldSelected = curSelected;
+		for (i in 0...iconArray.length)
+			remove(iconArray[i]);
+		iconArray = [];
 
-	// Clear song text
-	grpSongs.clear();
+		grpSongs.clear();
 
-	// Replace songs array
-	songs = newList.copy();
+		songs = newList.copy();
 
-	// Rebuild list
 		for (i in 0...songs.length)
 		{
 			var songText = new Alphabet(0, (70 * i) + 30, songs[i].songName, true, false, true);
@@ -76,8 +73,10 @@ class NormalPlayState extends MusicBeatState
 			add(icon);
 		}
 
-		curSelected = 0;
-		changeSelection();
+		curSelected = oldSelected;
+		if (curSelected >= songs.length)
+			curSelected = songs.length - 1;
+		changeSelection(0, true);
 	}
 	override function create()
 	{
@@ -102,7 +101,6 @@ class NormalPlayState extends MusicBeatState
 			bsideSongs.push(new FreeplayState.SongMetadata(data[0], Std.parseInt(data[2]), data[1]));
 		}
 
-		// Start in normal mode
 		songs = mainSongs.copy();
 		if (FlxG.sound.music != null)
 		{
@@ -111,7 +109,6 @@ class NormalPlayState extends MusicBeatState
 		}
 
 		#if windows
-		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Freeplay Menu", null);
 		#end
 
@@ -140,13 +137,8 @@ class NormalPlayState extends MusicBeatState
 			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
 			icon.sprTracker = songText;
 
-			// using a FlxGroup is too much fuss!
 			iconArray.push(icon);
 			add(icon);
-
-			// songText.x += 40;
-			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
-			// songText.screenCenter(X);
 		}
 
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
@@ -187,6 +179,8 @@ class NormalPlayState extends MusicBeatState
 		// add(selector);
 
 		var swag:Alphabet = new Alphabet(1, 0, "swag");
+
+		diffText.text = CoolUtil.difficultyFromInt(curDifficulty).toUpperCase();
 
 		super.create();
 	}
@@ -274,10 +268,16 @@ class NormalPlayState extends MusicBeatState
 			FlxG.switchState(new MasterPlayState());
 		}
         
-		if (songs[curSelected].songName == 'BLOODSHED-TWO')
+		if (songs[curSelected].songName == 'bleeding')
 		{
 			fdiffText.visible = true;
 			diffText.visible = false;
+		}
+		else
+		if (isB)
+		{
+			fdiffText.visible = false;
+			diffText.visible = true;
 		}
 		else
 		{
@@ -288,7 +288,6 @@ class NormalPlayState extends MusicBeatState
 		if (accepted)
 		{
 			FlxG.camera.antialiasing = true;
-			// adjusting the song name to be compatible
 			var songFormat = StringTools.replace(songs[curSelected].songName, " ", "-");
 			switch (songFormat) {
 				case 'Dad-Battle': songFormat = 'Dadbattle';
@@ -320,44 +319,54 @@ class NormalPlayState extends MusicBeatState
 	}
 	function changeDiff(change:Int = 0)
 	{
-		// Handle difficulty wrap-around
+		var prev = curDifficulty;
 		curDifficulty += change;
 
-		// NORMAL & B-SIDE WRAP LOGIC (unchanged)
 		if (curDifficulty < 0)
-		{
-			modeSwap();
 			curDifficulty = 4;
-		}
-		if (curDifficulty > 3)
-			modeSwap();
-		if (curDifficulty > 4)
-		{
-			modeSwapA();
+		else if (curDifficulty > 4)
 			curDifficulty = 0;
-		}
-		if (change == -1 && curDifficulty == 3)
-			modeSwapA();
 
-		// --- COOL DIFFICULTY OVERRIDE (Difficulty 3) ---
+		if (curDifficulty == 3 && prev == 4)
+			modeSwapA();
+			changeSelection(0, true);
+
+		if (curDifficulty == 0 && prev == 4)
+			modeSwapA();
+			changeSelection(0, true);
+
+		if (curDifficulty == 4 && prev == 0)
+			modeSwap();
+			changeSelection(0, true);
+
+		if (curDifficulty == 4 && prev == 3)
+			modeSwap();
+			changeSelection(0, true);
+
 		if (curDifficulty == 3)
 		{
-			// Force normal mode visuals
 			isB = false;
 
-			// Load cool list
 			reloadSongList(coolSongs);
 		}
 		else
 		{
-			// Load normal or B-side depending on mode
 			if (isB)
 				reloadSongList(bsideSongs);
 			else
 				reloadSongList(mainSongs);
 		}
-
-		// adjusting the highscore song name to be compatible (changeDiff)
+		if (songs[curSelected].songName == 'bleeding')
+		{
+			FlxTween.cancelTweensOf(FlxG.camera);
+			FlxTween.tween(FlxG.camera, {zoom: 1.1}, 0.5, {ease: FlxEase.quadInOut});
+		}
+		else
+		{
+			FlxTween.cancelTweensOf(FlxG.camera);
+			FlxTween.tween(FlxG.camera, {zoom: 1}, 1, {ease: FlxEase.quadInOut});
+		}
+		FlxG.camera.antialiasing = true;
 		var songHighscore = StringTools.replace(songs[curSelected].songName, " ", "-");
 		switch (songHighscore) {
 			case 'Dad-Battle': songHighscore = 'Dadbattle';
@@ -382,15 +391,15 @@ class NormalPlayState extends MusicBeatState
 		switch (curSelected)
 		{
 			case 0:
-			FlxG.camera.shake(0.0025, 0.05);
-			if (curBeat % 2 == 1)
-				FlxG.camera.angle = 1;
-			else
-				FlxG.camera.angle = -1;
-                    
-			FlxG.camera.y += 2;
-			FlxTween.tween(FlxG.camera, {y: 0}, 0.2, {ease: FlxEase.quadOut});
-			FlxTween.tween(FlxG.camera, {angle: 0}, 0.2, {ease: FlxEase.quadInOut});
+				FlxG.camera.shake(0.0025, 0.05);
+				if (curBeat % 2 == 1)
+					FlxG.camera.angle = 1;
+				else
+					FlxG.camera.angle = -1;
+
+				FlxG.camera.y += 2;
+				FlxTween.tween(FlxG.camera, {y: 0}, 0.2, {ease: FlxEase.quadOut});
+				FlxTween.tween(FlxG.camera, {angle: 0}, 0.2, {ease: FlxEase.quadInOut});
 			case 1:
 				FlxG.camera.shake(0.0025, 0.05);
 				if (curBeat == 1)
@@ -420,12 +429,24 @@ class NormalPlayState extends MusicBeatState
 					FlxG.camera.angle = -2;
 				FlxTween.tween(FlxG.camera, {angle: 0}, 0.2, {ease: FlxEase.quadInOut});
 			case 4:
-				FlxG.camera.shake(0.0025, 0.05);
-				if (curBeat % 2 == 1)
-					FlxG.camera.zoom = 1.01;
+				if (songs[curSelected].songName == 'bleeding')
+				{
+					fdiffText.visible = true;
+					diffText.visible = false;
+					FlxG.camera.shake(0.0025, 0.05);
+					FlxTween.cancelTweensOf(FlxG.camera);
+					FlxTween.tween(FlxG.camera, {zoom: 1.1}, 0.5, {ease: FlxEase.quadInOut});
+				}
 				else
+				{
+					FlxG.camera.shake(0.0025, 0.05);
+					if (curBeat % 2 == 1)
+					{
+						FlxG.camera.zoom = 1.01;
+					}
 					FlxG.camera.zoom = 0.99;
-				FlxTween.tween(FlxG.camera, {zoom: 1}, 0.2, {ease: FlxEase.quadInOut});
+					FlxTween.tween(FlxG.camera, {zoom: 1}, 0.2, {ease: FlxEase.quadInOut});
+				}
 			case 5:
 				if (curBeat % 5 == 1)
 					FlxG.camera.x += 5;
@@ -439,27 +460,58 @@ class NormalPlayState extends MusicBeatState
 				FlxTween.tween(FlxG.camera, {x: 0}, 0.2, {ease: FlxEase.quadInOut});
 				FlxTween.tween(FlxG.camera, {y: 0}, 0.2, {ease: FlxEase.quadInOut});
 			case 6:
-				if (curBeat % 2 == 1)
-					FlxG.camera.zoom = 1.01;
-				else
-					FlxG.camera.zoom = 0.99;
+				if (!isB)
+				{
+					if (curBeat % 2 == 1)
+						FlxG.camera.zoom = 1.01;
+					else
+						FlxG.camera.zoom = 0.99;
                    
-				FlxTween.tween(FlxG.camera, {zoom: 1}, 0.2, {ease: FlxEase.quadInOut});
+					FlxTween.tween(FlxG.camera, {zoom: 1}, 0.2, {ease: FlxEase.quadInOut});
+				}
+				else
+				{
+					FlxG.camera.shake(0.0025, 0.05);
+					if (curBeat % 2 == 1)
+					{
+						FlxG.camera.y += 5;
+						FlxG.camera.angle = 2;
+					}
+					else
+					{
+						FlxG.camera.y -= 5;
+						FlxG.camera.angle = -2;
+					}
+                   
+					FlxTween.tween(FlxG.camera, {y: 0}, 0.2, {ease: FlxEase.quadOut});
+					FlxTween.tween(FlxG.camera, {angle: 0}, 0.2, {ease: FlxEase.quadInOut});
+				}
 			case 7:
-				FlxG.camera.shake(0.0025, 0.05);
-				if (curBeat % 2 == 1)
+				if (!isB)
 				{
-					FlxG.camera.y += 5;
-					FlxG.camera.angle = 2;
+					FlxG.camera.shake(0.0025, 0.05);
+					if (curBeat % 2 == 1)
+					{
+						FlxG.camera.y += 5;
+						FlxG.camera.angle = 2;
+					}
+					else
+					{
+						FlxG.camera.y -= 5;
+						FlxG.camera.angle = -2;
+					}
+                   
+					FlxTween.tween(FlxG.camera, {y: 0}, 0.2, {ease: FlxEase.quadOut});
+					FlxTween.tween(FlxG.camera, {angle: 0}, 0.2, {ease: FlxEase.quadInOut});
 				}
 				else
 				{
-					FlxG.camera.y -= 5;
-					FlxG.camera.angle = -2;
+					FlxG.camera.shake(0.0015, 0.4);
+					if (curBeat % 2 == 1)
+						FlxG.camera.antialiasing = false;
+					else
+						FlxG.camera.antialiasing = true;
 				}
-                   
-				FlxTween.tween(FlxG.camera, {y: 0}, 0.2, {ease: FlxEase.quadOut});
-				FlxTween.tween(FlxG.camera, {angle: 0}, 0.2, {ease: FlxEase.quadInOut});
 			case 8:
 				FlxG.camera.shake(0.0015, 0.4);
 				if (curBeat % 2 == 1)
@@ -468,7 +520,7 @@ class NormalPlayState extends MusicBeatState
 					FlxG.camera.antialiasing = true;
 		}
 	}
-	function changeSelection(change:Int = 0)
+	function changeSelection(change:Int = 0, silent:Bool = false)
 	{
 		#if !switch
 		// NGio.logEvent('Fresh');
@@ -476,12 +528,15 @@ class NormalPlayState extends MusicBeatState
 
 		// NGio.logEvent('Fresh');
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
-        	curSelected += change;
-        	if (curSelected < 0)
+		if (!silent)
+		{
+	        	curSelected += change;
+		}
+       		if (curSelected < 0)
 			curSelected = songs.length - 1;
 		if (curSelected >= songs.length)
 			curSelected = 0;
-        
+
 		if (songs[curSelected].songName.contains("-b"))
 		{
 			if (curDifficulty < 0)
@@ -508,7 +563,6 @@ class NormalPlayState extends MusicBeatState
 				curDifficulty = 0;
 			}
 		}
-		FlxG.camera.antialiasing = true;
 		var songHighscore = StringTools.replace(songs[curSelected].songName, " ", "-");
 		switch (songHighscore) {
 			case 'Dad-Battle': songHighscore = 'Dadbattle';
@@ -564,14 +618,12 @@ class NormalPlayState extends MusicBeatState
 				case 4:
 					clr = FlxColor.BLACK;
 				case 5:
-					clr = 0xFF6E7896;
-				case 6:
 					clr = FlxColor.GREEN;
-				case 7:
+				case 6:
 					clr = 0xFF202020;
-				case 8:
+				case 7:
 					clr = FlxColor.MAGENTA;
-				case 9:
+				case 8:
 					clr = FlxColor.GRAY;
 			}
 		} else
@@ -589,10 +641,8 @@ class NormalPlayState extends MusicBeatState
 				case 5:
 					clr = 0xFF966E6E;
 				case 6:
-					clr = FlxColor.BLUE;
-				case 7:
 					clr = 0xFFDCDCDC;
-				case 8:
+				case 7:
 					clr = FlxColor.CYAN;                
 			}
 		}
@@ -644,11 +694,10 @@ class NormalPlayState extends MusicBeatState
 			case 2: bg.color = FlxColor.ORANGE;
 			case 3: bg.color = FlxColor.BROWN;
 			case 4: bg.color = FlxColor.BLACK;
-			case 5: bg.color = 0xFF6E7896;
-			case 6: bg.color = FlxColor.GREEN;
-			case 7: bg.color = 0xFF202020;
-			case 8: bg.color = FlxColor.MAGENTA;
-			case 9: bg.color = FlxColor.GRAY;
+			case 5: bg.color = FlxColor.GREEN;
+			case 6: bg.color = 0xFF202020;
+			case 7: bg.color = FlxColor.MAGENTA;
+			case 8: bg.color = FlxColor.GRAY;
 		}
 
 		FlxG.sound.playMusic(Paths.inst(songs[curSelected].songName), 0);
