@@ -328,20 +328,28 @@ class NormalPlayState extends MusicBeatState
 			curDifficulty = 0;
 
 		if (curDifficulty == 3 && prev == 4)
+		{
 			modeSwapA();
 			changeSelection(0, true);
+		}
 
 		if (curDifficulty == 0 && prev == 4)
+		{
 			modeSwapA();
 			changeSelection(0, true);
+		}
 
 		if (curDifficulty == 4 && prev == 0)
+		{
 			modeSwap();
 			changeSelection(0, true);
+		}
 
 		if (curDifficulty == 4 && prev == 3)
+		{
 			modeSwap();
 			changeSelection(0, true);
+		}
 
 		if (curDifficulty == 3)
 		{

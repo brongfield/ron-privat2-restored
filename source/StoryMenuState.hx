@@ -513,13 +513,13 @@ class StoryMenuState extends MusicBeatState
 	function changeDifficulty(change:Int = 0):Void
 	{
 		curDifficulty += change;
-		if (curWeek == 3 || curWeek == 0)
+		if (curWeek == 3)
 		{
 			curDifficulty = 2;
 		}
 		else
 		{
-			if (curWeek == 1)
+			if (curWeek == 0 || curWeek == 1)
 			{
 				if (curDifficulty < 0)
 					curDifficulty = 3;

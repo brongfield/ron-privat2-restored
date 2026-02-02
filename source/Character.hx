@@ -131,7 +131,20 @@ class Character extends FlxSprite
 				addOffset('danceLeft', 0, -9);
 				addOffset('danceRight', 0, -9);
 				playAnim('danceRight');
-			
+			case 'gf-whitty':
+				tex = Paths.getSparrowAtlas('characters/GF_Standing_Sway');
+				frames = tex;
+				animation.addByPrefix('sad', 'Sad', 24, false);
+				animation.addByPrefix('danceLeft', 'Idle Left', 24, false);
+				animation.addByPrefix('danceRight', 'Idle Right', 24, false);
+				animation.addByPrefix('scared', 'Scared', 24, false);
+
+				addOffset('sad', -140, -153);
+				addOffset('danceLeft', -140, -153);
+				addOffset('danceRight', -140, -153);
+				addOffset('scared', -140, -153);
+
+				playAnim('danceRight');
 			case 'gf-in':
 				// GIRLFRIEND CODE
 				tex = Paths.getSparrowAtlas('characters/GF_assets_In');
@@ -2132,6 +2145,16 @@ class Character extends FlxSprite
 							playAnim('danceLeft');
 					}
 				case 'gf-g':
+					if (!animation.curAnim.name.startsWith('hair'))
+					{
+						danced = !danced;
+
+						if (danced)
+							playAnim('danceRight');
+						else
+							playAnim('danceLeft');
+					}
+				case 'gf-whitty':
 					if (!animation.curAnim.name.startsWith('hair'))
 					{
 						danced = !danced;

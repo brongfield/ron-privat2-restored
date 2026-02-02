@@ -12,7 +12,7 @@ import flixel.FlxState;
 
 class Caching extends MusicBeatState
 {
-	var toBeDone:Int = 175;
+	var toBeDone:Int = 179;
 	var done:Int = 0;
 
 	var cacheTimer:Float = 0;
