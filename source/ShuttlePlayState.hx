@@ -64,7 +64,8 @@ class ShuttlePlayState extends MusicBeatState
 
 		 #if windows
 		 // Updating Discord Rich Presence
-		 DiscordClient.changePresence("In the Freeplay Menu", null);
+		DiscordClient.currentIcon = "normal";
+		 DiscordClient.changePresence("In the Freeplay Menu (Shuttle Man)", null);
 		 #end
 
 		var isDebug:Bool = false;

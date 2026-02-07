@@ -109,7 +109,8 @@ class NormalPlayState extends MusicBeatState
 		}
 
 		#if windows
-		DiscordClient.changePresence("In the Freeplay Menu", null);
+		DiscordClient.currentIcon = "normal";
+		DiscordClient.changePresence("In the Freeplay Menu (Main)", null);
 		#end
 
 		var isDebug:Bool = false;

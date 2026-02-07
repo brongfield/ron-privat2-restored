@@ -62,10 +62,11 @@ class InfernalPlayState extends MusicBeatState
 			}
 		 */
 
-		 #if windows
-		 // Updating Discord Rich Presence
-		 DiscordClient.changePresence("In the Freeplay Menu", null);
-		 #end
+		#if windows
+		// Updating Discord Rich Presence
+		DiscordClient.currentIcon = "normal";
+		DiscordClient.changePresence("In the Freeplay Menu (Infernal)", null);
+		#end
 
 		var isDebug:Bool = false;
 

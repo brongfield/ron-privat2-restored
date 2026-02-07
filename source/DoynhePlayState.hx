@@ -64,7 +64,8 @@ class DoynhePlayState extends MusicBeatState
 
 		 #if windows
 		 // Updating Discord Rich Presence
-		 DiscordClient.changePresence("In the Freeplay Menu", null);
+		DiscordClient.currentIcon = "normal";
+		 DiscordClient.changePresence("In the Freeplay Menu (Douyhe)", null);
 		 #end
 
 		var isDebug:Bool = false;

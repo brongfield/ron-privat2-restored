@@ -67,7 +67,8 @@ class BSIDEState extends MusicBeatState
 	{
 		#if windows
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Story Mode Menu", null);
+		DiscordClient.currentIcon = "normal";
+		DiscordClient.changePresence("In the Story Mode Menu (Bsides)", null);
 		#end
 
 		transIn = FlxTransitionableState.defaultTransIn;

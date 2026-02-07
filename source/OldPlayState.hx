@@ -64,7 +64,8 @@ class OldPlayState extends MusicBeatState
 
 		 #if windows
 		 // Updating Discord Rich Presence
-		 DiscordClient.changePresence("In the Freeplay Menu", null);
+		DiscordClient.currentIcon = "normal";
+		 DiscordClient.changePresence("In the Freeplay Menu (Old)", null);
 		 #end
 
 		var isDebug:Bool = false;

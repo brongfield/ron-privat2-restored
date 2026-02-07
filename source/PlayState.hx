@@ -365,16 +365,32 @@ class PlayState extends MusicBeatState
 		"ateloron-b"
 	];
 	public static var preloadCharsFactoryReset:Array<String> = [
-		"shaggy",
-		"whitty",
-		"blue",
 		"bandu",
-		"blueSad",
+		"dave"
+	];
+	public static var preloadCharsFactoryResetOld:Array<String> = [
+		"whitty",
+		"gf-whitty",
+		"bandu",
+		"dave",
+		"cheeky",
+		"meri"
+	];
+	public static var preloadCharsFactoryResetOlder:Array<String> = [
+		"whitty",
+		"gf-whitty",
 		"tricky",
 		"dave",
 		"douyhe",
-		"cheeky",
 		"meri"
+	];
+	public static var preloadCharsB2:Array<String> = [
+		"bf-g",
+		"gf-g",
+		"devilron"
+	];
+	public static var preloadCharsFactoryResetB:Array<String> = [
+		"shaggy"
 	];
 	var banduOrbitTime:Float = 0;
 	var banduOrbitActive:Bool = false;
@@ -498,17 +514,62 @@ class PlayState extends MusicBeatState
 		var iconsong:String = 'normal';
 		if (SONG.song.toLowerCase() == 'bloodshed')
 			iconsong = 'bloodshed';
+		if (SONG.song.toLowerCase() == 'not-bloodshed')
+			iconsong = 'bloodshed';
+		if (SONG.song.toLowerCase() == 'bloodshed-old')
+			iconsong = 'bloodshed';
+		if (SONG.song.toLowerCase() == 'bloodshed-older')
+			iconsong = 'bloodshed';
+		if (SONG.song.toLowerCase() == 'old-bloodshed')
+			iconsong = 'bloodshed';
+		if (SONG.song.toLowerCase() == 'omnipresent')
+			iconsong = 'bloodshed';
+		if (SONG.song.toLowerCase() == 'oh-god-oh-fuck')
+			iconsong = 'bloodshed';
+		if (SONG.song.toLowerCase() == 'homicidal-lunacy')
+			iconsong = 'bloodshed';
+		if (SONG.song.toLowerCase() == 'no-escape')
+			iconsong = 'bloodshed';
+		if (SONG.song.toLowerCase() == 'double-trouble')
+			iconsong = 'bloodshed';
+		if (SONG.song.toLowerCase() == 'bloodshed-two')
+			iconsong = 'bloodshed';
+		if (SONG.song.toLowerCase() == 'bloodbath')
+			iconsong = 'bloodshed';
+		if (SONG.song.toLowerCase() == 'bleeding')
+			iconsong = 'bloodshed';
+		if (SONG.song.toLowerCase() == 'anti-piracy')
+			iconsong = 'bloodshed';
 		if (SONG.song.toLowerCase() == 'trojan-virus')
+			iconsong = 'trojan';
+		if (SONG.song.toLowerCase() == 'trojan-virus-old')
+			iconsong = 'trojan';
+		if (SONG.song.toLowerCase() == 'trojan-virus-older')
+			iconsong = 'trojan';
+		if (SONG.song.toLowerCase() == 'old-trojan-virus')
 			iconsong = 'trojan';
 		if (SONG.song.toLowerCase() == 'recycle-bin')
 			iconsong = 'trojan';
 		if (SONG.song.toLowerCase() == 'file-manipulation')
-			iconsong = 'trojan';
-		if (SONG.song.toLowerCase() == 'atelophobia')
+			iconsong = 'atelo';
+		if (SONG.song.toLowerCase() == 'old-file-manipulation')
+			iconsong = 'atelo';
+		if (SONG.song.toLowerCase() == 'old-atelophobia')
 			iconsong = 'atelo';
 		if (SONG.song.toLowerCase() == 'factory-reset')
 			iconsong = 'reset';
+		if (SONG.song.toLowerCase() == 'factory-reset-old')
+			iconsong = 'reset';
+		if (SONG.song.toLowerCase() == 'factory-reset-older')
+			iconsong = 'reset';
+		if (SONG.song.toLowerCase() == 'factory-reset-oldest')
+			iconsong = 'reset';
+		if (SONG.song.toLowerCase() == 'old-factory-reset')
+			iconsong = 'reset';
+		if (SONG.song.toLowerCase() == 'trouble')
+			iconsong = 'reset';
 		DiscordClient.changePresenceIcon(iconsong, detailsText + " " + SONG.song + " (" + storyDifficultyText + ") " + Ratings.GenerateLetterRank(accuracy), "\nAcc: " + HelperFunctions.truncateFloat(accuracy, 2) + "% | Score: " + songScore + " | Misses: " + misses  , iconRPC);
+		DiscordClient.currentIcon = iconsong;
 		#end
 
 		Conductor.mapBPMChanges(SONG);
@@ -553,6 +614,10 @@ class PlayState extends MusicBeatState
 						":bf:alright Then"
 						];
 				}
+			case 'recycle-bin':
+				{
+					dialogue = CoolUtil.coolTextFile(Paths.txt('recycle-bin/dialoge'));
+				}
 			case 'file-manipulation':
 				{
 					dialogue = CoolUtil.coolTextFile(Paths.txt('file-manipulation/dialoge'));
@@ -563,6 +628,8 @@ class PlayState extends MusicBeatState
 				}
 			case 'factory-reset':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('factory-reset/dialogueIForgor'));
+			case 'factory-reset-oldest':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('factory-reset-oldest/dialogueIForgor'));
 			case 'holy-shit-dave-fnf':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('holy-shit-dave-fnf/dialoge'));
 		}
@@ -1322,22 +1389,6 @@ class PlayState extends MusicBeatState
 					error2.updateHitbox();
 					error2.antialiasing = true;
 
-					// Morshu
-					var morshu:FlxSprite = new FlxSprite(-650, 0);
-					morshu.frames = Paths.getSparrowAtlas('updateron/characters/mmm');
-					morshu.animation.addByPrefix('idle', 'bop', 24, true);
-					morshu.animation.play('idle');
-					morshu.updateHitbox();
-					morshu.antialiasing = true;
-
-					// Caleb
-					var caleb:FlxSprite = new FlxSprite(900, 0);
-					caleb.frames = Paths.getSparrowAtlas('updateron/characters/ears');
-					caleb.animation.addByPrefix('idle', 'bop', 24, true);
-					caleb.animation.play('idle');
-					caleb.updateHitbox();
-					caleb.antialiasing = true;
-
 					swagBG = new FlxSprite(-600, -200).loadGraphic(Paths.image('updateron/bg/hi'));
 					//swagBG.scrollFactor.set(0, 0);
 					swagBG.scale.set(1.75, 1.75);
@@ -1412,11 +1463,7 @@ class PlayState extends MusicBeatState
 					add(ground);
 					add(error);
 					add(error2);
-					add(morshu);
-					add(caleb);
 					add(swagBG);
-					morshu.alpha = 0;
-					caleb.alpha = 0;
 					swagBG.alpha = 0;
 					add(davebg);
 					add(stageHills);
@@ -1484,22 +1531,6 @@ class PlayState extends MusicBeatState
 					error2.animation.play('idle');
 					error2.updateHitbox();
 					error2.antialiasing = true;
-
-					// Morshu
-					var morshu:FlxSprite = new FlxSprite(-650, 0);
-					morshu.frames = Paths.getSparrowAtlas('updateron/characters/mmm');
-					morshu.animation.addByPrefix('idle', 'bop', 24, true);
-					morshu.animation.play('idle');
-					morshu.updateHitbox();
-					morshu.antialiasing = true;
-
-					// Caleb
-					var caleb:FlxSprite = new FlxSprite(900, 0);
-					caleb.frames = Paths.getSparrowAtlas('updateron/characters/ears');
-					caleb.animation.addByPrefix('idle', 'bop', 24, true);
-					caleb.animation.play('idle');
-					caleb.updateHitbox();
-					caleb.antialiasing = true;
 
 					davebg = new FlxSprite(-600, -200).loadGraphic(Paths.image('updateron/bg/sky'));
 					davebg.antialiasing = true;
@@ -1576,10 +1607,6 @@ class PlayState extends MusicBeatState
 					add(ground);
 					add(error);
 					add(error2);
-					add(morshu);
-					add(caleb);
-					morshu.alpha = 0;
-					caleb.alpha = 0;
 					add(davebg);
 					add(stageHills);
 					add(gate);
@@ -1651,22 +1678,6 @@ class PlayState extends MusicBeatState
 					error2.updateHitbox();
 					error2.antialiasing = true;
 
-					// Morshu
-					var morshu:FlxSprite = new FlxSprite(-650, 0);
-					morshu.frames = Paths.getSparrowAtlas('updateron/characters/mmm');
-					morshu.animation.addByPrefix('idle', 'bop', 24, true);
-					morshu.animation.play('idle');
-					morshu.updateHitbox();
-					morshu.antialiasing = true;
-
-					// Caleb
-					var caleb:FlxSprite = new FlxSprite(900, 0);
-					caleb.frames = Paths.getSparrowAtlas('updateron/characters/ears');
-					caleb.animation.addByPrefix('idle', 'bop', 24, true);
-					caleb.animation.play('idle');
-					caleb.updateHitbox();
-					caleb.antialiasing = true;
-
 					swagBG = new FlxSprite(-600, -200).loadGraphic(Paths.image('updateron/bg/hi'));
 					//swagBG.scrollFactor.set(0, 0);
 					swagBG.scale.set(1.75, 1.75);
@@ -1726,11 +1737,7 @@ class PlayState extends MusicBeatState
 					add(ground);
 					add(error);
 					add(error2);
-					add(morshu);
-					add(caleb);
 					add(swagBG);
-					morshu.alpha = 0;
-					caleb.alpha = 0;
 					swagBG.alpha = 0;
 					add(davebg);
 					add(stageHills);
@@ -1789,22 +1796,6 @@ class PlayState extends MusicBeatState
 					error2.updateHitbox();
 					error2.antialiasing = true;
 
-					// Morshu
-					var morshu:FlxSprite = new FlxSprite(-650, 0);
-					morshu.frames = Paths.getSparrowAtlas('updateron/characters/mmm');
-					morshu.animation.addByPrefix('idle', 'bop', 24, true);
-					morshu.animation.play('idle');
-					morshu.updateHitbox();
-					morshu.antialiasing = true;
-
-					// Caleb
-					var caleb:FlxSprite = new FlxSprite(900, 0);
-					caleb.frames = Paths.getSparrowAtlas('updateron/characters/ears');
-					caleb.animation.addByPrefix('idle', 'bop', 24, true);
-					caleb.animation.play('idle');
-					caleb.updateHitbox();
-					caleb.antialiasing = true;
-
 					bgmansion = new FlxSprite(-100, 0).loadGraphic(Paths.image('updateron/bg/bg_lemon'));
 					bgmansion.setGraphicSize(Std.int(bg.width * 1.5));
 					bgmansion.antialiasing = true;
@@ -1837,10 +1828,6 @@ class PlayState extends MusicBeatState
 					add(ground);
 					add(error);
 					add(error2);
-					add(morshu);
-					add(caleb);
-					morshu.alpha = 0;
-					caleb.alpha = 0;
 					add(bgmansion);
 					bgmansion.alpha = 0;
 					add(bruh);
@@ -2471,6 +2458,10 @@ class PlayState extends MusicBeatState
 			doof.finishThing = gfdies;
 		else
 			doof.finishThing = startCountdown;
+		if (SONG.song.toLowerCase() == 'file-manipulation')
+			doof.finishThing = gfdies;
+		else
+			doof.finishThing = startCountdown;
 
 		doof2.finishThing = startCountdown;
 		Conductor.songPosition = -5000;
@@ -2520,11 +2511,17 @@ class PlayState extends MusicBeatState
 		{
 			for (charName in preloadCharsOmnipresent)
 			{
+				DoCachingArmand();
+				DoCachingHacker();
+				DoCachingHellron();
+				DoCachingHellron2();
+				DoCachingHimdrip();
+				DoCaching2();
+				DoCachingBijuu();
 				var dummyChar:Character = new Character(-9999, -9999, charName);
 				dummyChar.visible = false;
 				dummyChar.alpha = 0.0001;
 				add(dummyChar);
-				DoCaching();
 			}
 			var vcr:VCRDistortionShader;
 			vcr = new VCRDistortionShader();
@@ -2549,26 +2546,81 @@ class PlayState extends MusicBeatState
 
 			camHUD.setFilters([new ShaderFilter(vcr)]);
 		}
-		if (curSong.toLowerCase() == "factory-reset" || curSong.toLowerCase() == "factory-reset-old" || curSong.toLowerCase() == "factory-reset-older" || curSong.toLowerCase() == "factory-reset-oldest" || curSong.toLowerCase() == "factory-reset-b")
+		if (curSong.toLowerCase() == "factory-reset")
 		{
 			for (charName in preloadCharsFactoryReset)
 			{
+				DoCachingDave();
+				DoCachingBandu();
 				var dummyChar:Character = new Character(-9999, -9999, charName);
 				dummyChar.visible = false;
 				dummyChar.alpha = 0.0001;
 				add(dummyChar);
-				DoCaching();
+			}
+		}
+		if (curSong.toLowerCase() == "factory-reset-old")
+		{
+			for (charName in preloadCharsFactoryResetOld)
+			{
+				DoCachingDave();
+				DoCachingBandu();
+				DoCachingMeri();
+				DoCachingCheeky();
+				DoCachingWhitty();
+				var dummyChar:Character = new Character(-9999, -9999, charName);
+				dummyChar.visible = false;
+				dummyChar.alpha = 0.0001;
+				add(dummyChar);
+			}
+		}
+		if (curSong.toLowerCase() == "factory-reset-older")
+		{
+			for (charName in preloadCharsFactoryResetOlder)
+			{
+				DoCachingDave();
+				DoCachingMeri();
+				DoCachingWhitty();
+				DoCachingTricky();
+				DoCaching2();
+				var dummyChar:Character = new Character(-9999, -9999, charName);
+				dummyChar.visible = false;
+				dummyChar.alpha = 0.0001;
+				add(dummyChar);
+			}
+		}
+		if (curSong.toLowerCase() == "factory-reset-b")
+		{
+			for (charName in preloadCharsFactoryResetB)
+			{
+				DoCachingShaggy();
+				var dummyChar:Character = new Character(-9999, -9999, charName);
+				dummyChar.visible = false;
+				dummyChar.alpha = 0.0001;
+				add(dummyChar);
 			}
 		}
 		if (curSong.toLowerCase() == "file-manipulation-b")
 		{
 			for (charName in preloadCharsFMB)
 			{
+				DoCachingBteloron();
 				var dummyChar:Character = new Character(-9999, -9999, charName);
 				dummyChar.visible = false;
 				dummyChar.alpha = 0.0001;
 				add(dummyChar);
-				DoCaching();
+			}
+		}
+		if (curSong.toLowerCase() == "bloodshed-two")
+		{
+			for (charName in preloadCharsB2)
+			{
+				DoCachingDevilron();
+				DoCachingGrayfriend();
+				DoCachingGraygf();
+				var dummyChar:Character = new Character(-9999, -9999, charName);
+				dummyChar.visible = false;
+				dummyChar.alpha = 0.0001;
+				add(dummyChar);
 			}
 		}
 		FlxG.camera.follow(camFollow, LOCKON, 0.04 * (30 / (cast (Lib.current.getChildAt(0), Main)).getFPS()));
@@ -3177,9 +3229,11 @@ class PlayState extends MusicBeatState
 					add(Estatic);
 					firebg.alpha = 1;
 				case 'trojan-virus':
+					DoCaching();
 					schoolIntro(doof);
 					add(Estatic);
 				case 'trojan-virus-old':
+					DoCaching();
 					add(Estatic);
 					startCountdown();
 				case 'factory-reset-old':
@@ -3196,18 +3250,22 @@ class PlayState extends MusicBeatState
 					add(Estatic2);
 					FlxTween.tween(Estatic2, {"scale.x":0.8,"scale.y":0.8}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
 					add(Estatic);
-					startCountdown();
-				case 'file-manipulation':
 					schoolIntro(doof);
+				case 'file-manipulation':
+					DoCaching();
+					camFollow.y = dad.getMidpoint().y;
+					camFollow.x = dad.getMidpoint().x + 300;
+					FlxG.camera.follow(camFollow, LOCKON, 0.04 * (30 / (cast (Lib.current.getChildAt(0), Main)).getFPS()));
 					add(Estatic2);
 					FlxTween.tween(Estatic2, {"scale.x":0.8,"scale.y":0.8}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
 					add(Estatic);
 					ronAnimation = new FlxSprite();
-					ronAnimation.frames = Paths.getSparrowAtlas('updateron/cachecharacters/ateloron-Transform');
+					ronAnimation.frames = Paths.getSparrowAtlas('updateron/cachecharacters/Cutscenes/ateloron-Transform');
 					ronAnimation.animation.addByPrefix('idle', 'transformation instance 1', 24);
 					ronAnimation.animation.play('idle');
 					ronAnimation.visible = false;
 					add(ronAnimation);
+					schoolIntro(doof);
 				case 'trojan-virus-b':
 					add(Estatic);
 					startCountdown();
@@ -3220,6 +3278,10 @@ class PlayState extends MusicBeatState
 					camFollow.y = dad.getMidpoint().y;
 					camFollow.x = dad.getMidpoint().x + 300;
 					FlxG.camera.follow(camFollow, LOCKON, 0.04 * (30 / (cast (Lib.current.getChildAt(0), Main)).getFPS()));
+					schoolIntro(doof);
+				case 'factory-reset':
+					schoolIntro(doof);
+				case 'factory-reset-oldest':
 					schoolIntro(doof);
 				case 'holy-shit-dave-fnf':
 					schoolIntro2(doof2, false);
@@ -3300,7 +3362,7 @@ class PlayState extends MusicBeatState
 				camFollow.x = dad.getMidpoint().x + 300;
 				FlxTween.tween(FlxG.camera, {zoom:0.9}, 2, {ease: FlxEase.cubeInOut});
 				atelophobiaCutsceneDone = true;
-				dialogue = CoolUtil.coolTextFile(Paths.txt('atelophobia/dialoge2'));
+				dialogue = CoolUtil.coolTextFile(Paths.txt('file-manipulation/dialoge2'));
 				FlxG.camera.follow(camFollow, LOCKON, 0.04 * (30 / (cast (Lib.current.getChildAt(0), Main)).getFPS()));
 				var lol:DialogueBox = new DialogueBox(false, dialogue);
 				lol.scrollFactor.set();
@@ -4253,9 +4315,37 @@ class PlayState extends MusicBeatState
 					credits = 'kurtfan5468';
 				case 'file-manipulation':
 					credits = 'Rareblin';
-				case 'atelophobia':
+				case 'old-ron':
+					credits = 'Sic';
+				case 'old-wasted':
+					credits = 'coquers_';
+				case 'old-ayo':
+					credits = 'ArmandRonan & kurtfan5468 & Sz';
+				case 'old-bloodshed':
+					credits = 'BlueBoyeet';
+				case 'bloodshed-old':
+					credits = 'BlueBoyeet';
+				case 'bloodshed-older':
+					credits = 'BlueBoyeet';
+				case 'old-trojan-virus':
+					credits = 'DeepFriedBolonese';
+				case 'trojan-virus-old':
+					credits = 'DeepFriedBolonese';
+				case 'trojan-virus-older':
+					credits = 'DeepFriedBolonese';
+				case 'old-file-manipulation':
+					credits = 'Rareblin';
+				case 'old-atelophobia':
 					credits = 'firey';
 				case 'factory-reset':	
+					credits = 'ArmandRonan';
+				case 'factory-reset-old':	
+					credits = 'ArmandRonan';
+				case 'factory-reset-older':	
+					credits = 'ArmandRonan';
+				case 'old-factory-reset':	
+					credits = 'ArmandRonan';
+				case 'factory-reset-oldest':	
 					credits = 'ArmandRonan';
 				case 'ron-b':
 					credits = 'DeepFriedBolonese';
@@ -4269,11 +4359,27 @@ class PlayState extends MusicBeatState
 					credits = 'Sic';
 				case 'file-manipulation-b':
 					credits = 'Sic';
-				case 'atelophobia-b':
+				case 'old-ron-b':
+					credits = 'DeepFriedBolonese';
+				case 'old-ayo-b':
+					credits = 'Tigression';
+				case 'old-bloodshed-b':
+					credits = 'Sic';
+				case 'old-trojan-virus-b':
+					credits = 'Sic';
+				case 'old-file-manipulation-b':
+					credits = 'Sic';
+				case 'file-manipulation-b-old':
+					credits = 'Sic';
+				case 'old-atelophobia-b':
 					credits = 'Tigression';
 				case 'factory-reset-b':
 					credits = 'Tigression';
+				case 'old-factory-reset-b':
+					credits = 'Tigression';
 				case 'holy-shit-dave-fnf':
+					credits = 'DeepFriedBolonese';
+				case 'holy-shit-dave-fnf-old':
 					credits = 'DeepFriedBolonese';
 				case 'slammed':
 					credits = 'Tigression';
@@ -4281,21 +4387,43 @@ class PlayState extends MusicBeatState
 					credits = 'Tigression';
 				case 'frosting-over':
 					credits = 'Tigression';
+				case 'slammed-old':
+					credits = 'Tigression';
+				case 'frosting-over-old':
+					credits = 'Tigression';
 				case 'raw-meaty-meats':
 					credits = 'Zesty';
 				case 'assassination':
 					credits = 'Zesty & Tigression';
 				case 'steak':
 					credits = 'Zesty';
+				case 'raw':
+					credits = 'ZesCrew2';
+				case 'assassinate':
+					credits = 'ZesCrew2';
+				case 'uncooked-meat':
+					credits = 'ZesCrew2';
 				case 'pretty-wacky':
+					credits = 'Tigression';
+				case 'pretty-wacky-old':
 					credits = 'Tigression';
 				case 'he-hates-me':
 					credits = 'Lexicord';
+				case 'he-hates-me-old':
+					credits = 'Lexicord';
 				case 'typical-dissecration':
+					credits = 'nobody yet';
+				case 'atypical':
 					credits = 'nobody yet';
 				case 'trouble':
 					credits = 'KyleGFX & kurtfan5468';
+				case 'old-trouble':
+					credits = 'KyleGFX & kurtfan5468';
 				case 'bijuu':
+					credits = 'Tigression';
+				case 'bijuu-old':
+					credits = 'Tigression';
+				case 'old-bijuu':
 					credits = 'Tigression';
 				case 'double-trouble':
 					credits = 'yourlocalmusician';
@@ -4311,8 +4439,6 @@ class PlayState extends MusicBeatState
 					credits = 'ArmandRonan';
 				case 'defecation':
 					credits = 'ArmandRonan';
-				case 'raw':
-					credits = 'ZesCrew2';
 				case 'cartified-champion':
 					credits = 'Gangster Spongebob';
 				case 'rong-aisle':
@@ -7245,13 +7371,13 @@ class PlayState extends MusicBeatState
 				trace("cached " + replaced);
 			}
 		}
-	function DoCaching()
+	function DoCachingBijuu()
 		{
 			var images = [];
 			var xml = [];
 			trace("caching images...");
 
-			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/")))
+			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/Bijuu/")))
 			{
 				if (!i.endsWith(".png"))
 					continue;
@@ -7264,17 +7390,617 @@ class PlayState extends MusicBeatState
 			for (i in images)
 			{
 				var replaced = i.replace(".png","");
-				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/" + replaced,"shared"));
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Bijuu/" + replaced,"shared"));
 				trace("cached " + replaced);
 			}
 		
 		for (i in xml)
 			{
 				var replaced = i.replace(".xml","");
-				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/" + replaced,"shared"));
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Bijuu/" + replaced,"shared"));
 				trace("cached " + replaced);
 			}
-			DoCaching2();
+		}
+	function DoCachingAteloron()
+		{
+			var images = [];
+			var xml = [];
+			trace("caching images...");
+
+			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/Ateloron/")))
+			{
+				if (!i.endsWith(".png"))
+					continue;
+				images.push(i);
+
+				if (!i.endsWith(".xml"))
+					continue;
+				xml.push(i);
+			}
+			for (i in images)
+			{
+				var replaced = i.replace(".png","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Ateloron/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		
+		for (i in xml)
+			{
+				var replaced = i.replace(".xml","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Ateloron/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		}
+	function DoCachingBandu()
+		{
+			var images = [];
+			var xml = [];
+			trace("caching images...");
+
+			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/Bandu/")))
+			{
+				if (!i.endsWith(".png"))
+					continue;
+				images.push(i);
+
+				if (!i.endsWith(".xml"))
+					continue;
+				xml.push(i);
+			}
+			for (i in images)
+			{
+				var replaced = i.replace(".png","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Bandu/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		
+		for (i in xml)
+			{
+				var replaced = i.replace(".xml","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Bandu/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		}
+	function DoCachingGrayfriend()
+		{
+			var images = [];
+			var xml = [];
+			trace("caching images...");
+
+			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/Grayfriend/")))
+			{
+				if (!i.endsWith(".png"))
+					continue;
+				images.push(i);
+
+				if (!i.endsWith(".xml"))
+					continue;
+				xml.push(i);
+			}
+			for (i in images)
+			{
+				var replaced = i.replace(".png","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Grayfriend/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		
+		for (i in xml)
+			{
+				var replaced = i.replace(".xml","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Grayfriend/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		}
+	function DoCachingMeri()
+		{
+			var images = [];
+			var xml = [];
+			trace("caching images...");
+
+			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/Meri/")))
+			{
+				if (!i.endsWith(".png"))
+					continue;
+				images.push(i);
+
+				if (!i.endsWith(".xml"))
+					continue;
+				xml.push(i);
+			}
+			for (i in images)
+			{
+				var replaced = i.replace(".png","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Meri/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		
+		for (i in xml)
+			{
+				var replaced = i.replace(".xml","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Meri/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		}
+	function DoCachingNeil()
+		{
+			var images = [];
+			var xml = [];
+			trace("caching images...");
+
+			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/Neil/")))
+			{
+				if (!i.endsWith(".png"))
+					continue;
+				images.push(i);
+
+				if (!i.endsWith(".xml"))
+					continue;
+				xml.push(i);
+			}
+			for (i in images)
+			{
+				var replaced = i.replace(".png","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Neil/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		
+		for (i in xml)
+			{
+				var replaced = i.replace(".xml","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Neil/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		}
+	function DoCachingWhitty()
+		{
+			var images = [];
+			var xml = [];
+			trace("caching images...");
+
+			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/Whitty/")))
+			{
+				if (!i.endsWith(".png"))
+					continue;
+				images.push(i);
+
+				if (!i.endsWith(".xml"))
+					continue;
+				xml.push(i);
+			}
+			for (i in images)
+			{
+				var replaced = i.replace(".png","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Whitty/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		
+		for (i in xml)
+			{
+				var replaced = i.replace(".xml","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Whitty/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		}
+	function DoCachingTricky()
+		{
+			var images = [];
+			var xml = [];
+			trace("caching images...");
+
+			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/Tricky/")))
+			{
+				if (!i.endsWith(".png"))
+					continue;
+				images.push(i);
+
+				if (!i.endsWith(".xml"))
+					continue;
+				xml.push(i);
+			}
+			for (i in images)
+			{
+				var replaced = i.replace(".png","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Tricky/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		
+		for (i in xml)
+			{
+				var replaced = i.replace(".xml","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Tricky/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		}
+	function DoCachingHellronDrippin()
+		{
+			var images = [];
+			var xml = [];
+			trace("caching images...");
+
+			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/Hellron-Drippin/")))
+			{
+				if (!i.endsWith(".png"))
+					continue;
+				images.push(i);
+
+				if (!i.endsWith(".xml"))
+					continue;
+				xml.push(i);
+			}
+			for (i in images)
+			{
+				var replaced = i.replace(".png","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Hellron-Drippin/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		
+		for (i in xml)
+			{
+				var replaced = i.replace(".xml","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Hellron-Drippin/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		}
+	function DoCachingGraygf()
+		{
+			var images = [];
+			var xml = [];
+			trace("caching images...");
+
+			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/Graygf/")))
+			{
+				if (!i.endsWith(".png"))
+					continue;
+				images.push(i);
+
+				if (!i.endsWith(".xml"))
+					continue;
+				xml.push(i);
+			}
+			for (i in images)
+			{
+				var replaced = i.replace(".png","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Graygf/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		
+		for (i in xml)
+			{
+				var replaced = i.replace(".xml","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Graygf/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		}
+	function DoCachingDevilron()
+		{
+			var images = [];
+			var xml = [];
+			trace("caching images...");
+
+			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/Devilron/")))
+			{
+				if (!i.endsWith(".png"))
+					continue;
+				images.push(i);
+
+				if (!i.endsWith(".xml"))
+					continue;
+				xml.push(i);
+			}
+			for (i in images)
+			{
+				var replaced = i.replace(".png","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Devilron/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		
+		for (i in xml)
+			{
+				var replaced = i.replace(".xml","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Devilron/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		}
+	function DoCachingDave()
+		{
+			var images = [];
+			var xml = [];
+			trace("caching images...");
+
+			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/Dave/")))
+			{
+				if (!i.endsWith(".png"))
+					continue;
+				images.push(i);
+
+				if (!i.endsWith(".xml"))
+					continue;
+				xml.push(i);
+			}
+			for (i in images)
+			{
+				var replaced = i.replace(".png","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Dave/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		
+		for (i in xml)
+			{
+				var replaced = i.replace(".xml","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Dave/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		}
+	function DoCachingCheeky()
+		{
+			var images = [];
+			var xml = [];
+			trace("caching images...");
+
+			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/Cheeky/")))
+			{
+				if (!i.endsWith(".png"))
+					continue;
+				images.push(i);
+
+				if (!i.endsWith(".xml"))
+					continue;
+				xml.push(i);
+			}
+			for (i in images)
+			{
+				var replaced = i.replace(".png","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Cheeky/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		
+		for (i in xml)
+			{
+				var replaced = i.replace(".xml","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Cheeky/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		}
+	function DoCachingBteloron()
+		{
+			var images = [];
+			var xml = [];
+			trace("caching images...");
+
+			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/Bteloron/")))
+			{
+				if (!i.endsWith(".png"))
+					continue;
+				images.push(i);
+
+				if (!i.endsWith(".xml"))
+					continue;
+				xml.push(i);
+			}
+			for (i in images)
+			{
+				var replaced = i.replace(".png","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Bteloron/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		
+		for (i in xml)
+			{
+				var replaced = i.replace(".xml","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Bteloron/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		}
+	function DoCachingShaggy()
+		{
+			var images = [];
+			var xml = [];
+			trace("caching images...");
+
+			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/Shaggy/")))
+			{
+				if (!i.endsWith(".png"))
+					continue;
+				images.push(i);
+
+				if (!i.endsWith(".xml"))
+					continue;
+				xml.push(i);
+			}
+			for (i in images)
+			{
+				var replaced = i.replace(".png","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Shaggy/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		
+		for (i in xml)
+			{
+				var replaced = i.replace(".xml","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Shaggy/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		}
+	function DoCachingHacker()
+		{
+			var images = [];
+			var xml = [];
+			trace("caching images...");
+
+			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/Hacker/")))
+			{
+				if (!i.endsWith(".png"))
+					continue;
+				images.push(i);
+
+				if (!i.endsWith(".xml"))
+					continue;
+				xml.push(i);
+			}
+			for (i in images)
+			{
+				var replaced = i.replace(".png","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Hacker/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		
+		for (i in xml)
+			{
+				var replaced = i.replace(".xml","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Hacker/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		}
+	function DoCachingHellron2()
+		{
+			var images = [];
+			var xml = [];
+			trace("caching images...");
+
+			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/Hellron-2/")))
+			{
+				if (!i.endsWith(".png"))
+					continue;
+				images.push(i);
+
+				if (!i.endsWith(".xml"))
+					continue;
+				xml.push(i);
+			}
+			for (i in images)
+			{
+				var replaced = i.replace(".png","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Hellron-2/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		
+		for (i in xml)
+			{
+				var replaced = i.replace(".xml","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Hellron-2/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		}
+	function DoCachingHimdrip()
+		{
+			var images = [];
+			var xml = [];
+			trace("caching images...");
+
+			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/Himdrip/")))
+			{
+				if (!i.endsWith(".png"))
+					continue;
+				images.push(i);
+
+				if (!i.endsWith(".xml"))
+					continue;
+				xml.push(i);
+			}
+			for (i in images)
+			{
+				var replaced = i.replace(".png","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Himdrip/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		
+		for (i in xml)
+			{
+				var replaced = i.replace(".xml","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Himdrip/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		}
+	function DoCachingHellron()
+		{
+			var images = [];
+			var xml = [];
+			trace("caching images...");
+
+			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/Hellron/")))
+			{
+				if (!i.endsWith(".png"))
+					continue;
+				images.push(i);
+
+				if (!i.endsWith(".xml"))
+					continue;
+				xml.push(i);
+			}
+			for (i in images)
+			{
+				var replaced = i.replace(".png","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Hellron/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		
+		for (i in xml)
+			{
+				var replaced = i.replace(".xml","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Hellron/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		}
+	function DoCachingArmand()
+		{
+			var images = [];
+			var xml = [];
+			trace("caching images...");
+
+			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/Armand/")))
+			{
+				if (!i.endsWith(".png"))
+					continue;
+				images.push(i);
+
+				if (!i.endsWith(".xml"))
+					continue;
+				xml.push(i);
+			}
+			for (i in images)
+			{
+				var replaced = i.replace(".png","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Armand/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		
+		for (i in xml)
+			{
+				var replaced = i.replace(".xml","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Armand/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		}
+
+	function DoCaching()
+		{
+			var images = [];
+			var xml = [];
+			trace("caching images...");
+
+			for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/updateron/cachecharacters/Cutscenes/")))
+			{
+				if (!i.endsWith(".png"))
+					continue;
+				images.push(i);
+
+				if (!i.endsWith(".xml"))
+					continue;
+				xml.push(i);
+			}
+			for (i in images)
+			{
+				var replaced = i.replace(".png","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Cutscenes/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
+		
+		for (i in xml)
+			{
+				var replaced = i.replace(".xml","");
+				FlxG.bitmap.add(Paths.image("updateron/cachecharacters/Cutscenes/" + replaced,"shared"));
+				trace("cached " + replaced);
+			}
 		}
 	function RonIngameTransform()
 	{
@@ -8044,7 +8770,7 @@ class PlayState extends MusicBeatState
 		if (curSong == 'Trojan-Virus')
 		{
 			ronAnimation = new FlxSprite();
-			ronAnimation.frames = Paths.getSparrowAtlas('updateron/cachecharacters/Tron');
+			ronAnimation.frames = Paths.getSparrowAtlas('updateron/cachecharacters/Cutscenes/Tron');
 			ronAnimation.animation.addByPrefix('idle', 'Tron Transform', 24, false);
 			ronAnimation.animation.play('idle');
 			ronAnimation.visible = false;
@@ -8134,7 +8860,7 @@ class PlayState extends MusicBeatState
 		if (curSong == 'Trojan-Virus-old')
 		{
 			ronAnimation = new FlxSprite();
-			ronAnimation.frames = Paths.getSparrowAtlas('updateron/cachecharacters/ronPower-transformation');
+			ronAnimation.frames = Paths.getSparrowAtlas('updateron/cachecharacters/Cutscenes/ronPower-transformation');
 			ronAnimation.animation.addByPrefix('idle', 'ron transformation instance', 24, false);
 			ronAnimation.offset.set(70, 250);
 			ronAnimation.animation.play('idle');

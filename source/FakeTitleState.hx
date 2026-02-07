@@ -78,10 +78,11 @@ class FakeTitleState extends MusicBeatState
 
 		#if windows
 		DiscordClient.initialize();
+		DiscordClient.currentIcon = "normal";
 
 		Application.current.onExit.add (function (exitCode) {
 			DiscordClient.shutdown();
-		 });
+		});
 		 
 		#end
 

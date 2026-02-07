@@ -515,7 +515,7 @@ class Character extends FlxSprite
 				
 				flipX = true;
 			case 'dave':
-				frames = Paths.getSparrowAtlas('updateron/cachecharacters/dave_sheet', 'shared');
+				frames = Paths.getSparrowAtlas('updateron/cachecharacters/Dave/dave_sheet', 'shared');
 				animation.addByPrefix('idle', 'idleDance', 24, false);
 				animation.addByPrefix('singUP', 'Up', 24, false);
 				animation.addByPrefix('singRIGHT', 'Right', 24, false);
@@ -815,8 +815,8 @@ class Character extends FlxSprite
 				addOffset("Ugh", 71, -40);
 				playAnim('idle');
 			case 'devilron':
-				// tex = Paths.getSparrowAtlas('updateron/cachecharacters/hellron-2');
-				tex = Paths.getSparrowAtlas('updateron/cachecharacters/devilron');
+				// tex = Paths.getSparrowAtlas('updateron/cachecharacters/Hellron-2/hellron-2');
+				tex = Paths.getSparrowAtlas('updateron/cachecharacters/Devilron/devilron');
 				frames = tex;
 				animation.addByPrefix('idle', "idle", 24);
 				animation.addByPrefix('singUP', 'up', 24, false);
@@ -830,7 +830,7 @@ class Character extends FlxSprite
 				addOffset("singDOWN", 40, -35);
 				playAnim('idle');
 			case 'devilron-old':
-				tex = Paths.getSparrowAtlas('updateron/cachecharacters/hellron-2');
+				tex = Paths.getSparrowAtlas('updateron/cachecharacters/Hellron-2/hellron-2');
 				frames = tex;
 				animation.addByPrefix('idle', "idle normal", 24);
 				animation.addByPrefix('singUP', 'up normal', 24, false);
@@ -844,7 +844,7 @@ class Character extends FlxSprite
 				addOffset("singDOWN",-25,-30);
 				playAnim('idle');
 			case 'hellron':
-				tex = Paths.getSparrowAtlas('updateron/cachecharacters/hellron');
+				tex = Paths.getSparrowAtlas('updateron/cachecharacters/Hellron/hellron');
 				frames = tex;
 				animation.addByPrefix('idle', "idle normal", 24);
 				animation.addByPrefix('singUP', 'up normal', 24, false);
@@ -900,7 +900,7 @@ class Character extends FlxSprite
 				addOffset("singDOWN", -88, -137);
 				playAnim('idle');
 			case 'hacker':
-				tex = Paths.getSparrowAtlas('updateron/cachecharacters/hacker');
+				tex = Paths.getSparrowAtlas('updateron/cachecharacters/Hacker/hacker');
 				frames = tex;
 				animation.addByPrefix('idle', "idle normal", 24);
 				animation.addByPrefix('singUP', 'up', 24, false);
@@ -914,7 +914,7 @@ class Character extends FlxSprite
 				addOffset("singDOWN",370,200);
 				playAnim('idle');
 			case 'hellron-drippin':
-				tex = Paths.getSparrowAtlas('updateron/cachecharacters/hellron-drippin');
+				tex = Paths.getSparrowAtlas('updateron/cachecharacters/Hellron-Drippin/hellron-drippin');
 				frames = tex;
 				animation.addByPrefix('idle', "idle instance 1", 24);
 				animation.addByPrefix('singUP', 'up instance 1', 24, false);
@@ -928,7 +928,7 @@ class Character extends FlxSprite
 				addOffset("singDOWN",270,-130);
 				playAnim('idle');
 			case 'hellron-crazy':
-				tex = Paths.getSparrowAtlas('updateron/cachecharacters/hellron');
+				tex = Paths.getSparrowAtlas('updateron/cachecharacters/Hellron/hellron');
 				frames = tex;
 				animation.addByPrefix('idle', "idle", 24);
 				animation.addByPrefix('singUP', 'up', 24, false);
@@ -990,7 +990,7 @@ class Character extends FlxSprite
 				addOffset("Ugh", 71, -40);
 				playAnim('idle');
 			case 'ateloron':
-				tex = Paths.getSparrowAtlas('updateron/cachecharacters/ateloron', 'shared');
+				tex = Paths.getSparrowAtlas('updateron/cachecharacters/Ateloron/ateloron', 'shared');
 				frames = tex;
 				animation.addByPrefix('idle', "idle", 24);
 				animation.addByPrefix('singUP', 'up', 24, false);
@@ -1020,7 +1020,7 @@ class Character extends FlxSprite
 				addOffset("Ugh", 71, -40);
 				playAnim('idle');
 			case 'ateloron-b':
-				tex = Paths.getSparrowAtlas('updateron/cachecharacters/bteloron');
+				tex = Paths.getSparrowAtlas('updateron/cachecharacters/Bteloron/bteloron');
 				frames = tex;
 				animation.addByPrefix('idle', "idle", 24);
 				animation.addByPrefix('singUP', 'up', 24, false);
@@ -1066,7 +1066,7 @@ class Character extends FlxSprite
 				addOffset("Ugh", 71, -40);
 				playAnim('idle');
 			case 'ron-usb':
-				tex = Paths.getSparrowAtlas('updateron/cachecharacters/ron-usb', 'shared');
+				tex = Paths.getSparrowAtlas('updateron/cachecharacters/Ron-Usb/ron-usb', 'shared');
 				frames = tex;
 				animation.addByPrefix('idle', "idle", 24);
 				animation.addByPrefix('singUP', 'up', 24, false);
@@ -1080,7 +1080,7 @@ class Character extends FlxSprite
 				addOffset("singDOWN", 55, -143);
 				playAnim('idle');
 			case 'ron-usb-old':
-				tex = Paths.getSparrowAtlas('updateron/cachecharacters/ron-usb', 'shared');
+				tex = Paths.getSparrowAtlas('updateron/cachecharacters/Ron-Usb/ron-usb', 'shared');
 				frames = tex;
 				animation.addByPrefix('idle', "idle", 24);
 				animation.addByPrefix('singUP', 'up', 24, false);
@@ -1216,7 +1216,7 @@ class Character extends FlxSprite
 				addOffset("singDOWN", 40, -120);
 				playAnim('idle');
 			case 'bijuuron':
-				frames = Paths.getSparrowAtlas('updateron/cachecharacters/kill_yourself');
+				frames = Paths.getSparrowAtlas('updateron/cachecharacters/Bijuu/kill_yourself');
 				animation.addByPrefix('idle', 'idle', 24, true);
 				animation.addByPrefix('singUP', 'up', 36, false);
 				animation.addByPrefix('singDOWN', 'down', 36, false);
@@ -1565,7 +1565,7 @@ class Character extends FlxSprite
 				addOffset("singDOWN", 40, -120);
 				playAnim('idle');
 			case 'cheeky':
-				tex = Paths.getSparrowAtlas('updateron/cachecharacters/Cheeky');
+				tex = Paths.getSparrowAtlas('updateron/cachecharacters/Cheeky/Cheeky');
 				frames = tex;
 				animation.addByPrefix('idle', 'Cheeky Idle Dance', 24);
 				animation.addByPrefix('singUP', 'Cheeky NOTE UP', 24, false);
@@ -1583,7 +1583,7 @@ class Character extends FlxSprite
 				playAnim('idle');
 				//healthBarColor = FlxColor.fromRGB(110, 179, 204);
 			case 'whitty': // whitty reg (lofight,overhead)
-				tex = Paths.getSparrowAtlas('updateron/cachecharacters/WhittySprites');
+				tex = Paths.getSparrowAtlas('updateron/cachecharacters/Whitty/WhittySprites');
 				frames = tex;
 				animation.addByPrefix('idle', 'Idle', 24);
 				animation.addByPrefix('singUP', 'Sing Up', 24);
@@ -1597,7 +1597,7 @@ class Character extends FlxSprite
 				addOffset("singLEFT", -10, 10);
 				playAnim('idle');
 			case 'bandu':
-				frames = Paths.getSparrowAtlas('updateron/cachecharacters/bandu');
+				frames = Paths.getSparrowAtlas('updateron/cachecharacters/Bandu/bandu');
 				
 				animation.addByPrefix('idle', 'idle', 24, true);
 				animation.addByPrefix('singUP', 'up', 24, false);
@@ -1684,7 +1684,7 @@ class Character extends FlxSprite
 				flipX = true;
 				flipX = true;
 			case 'blue':
-				tex = Paths.getSparrowAtlas('updateron/cachecharacters/WhittyWatchRed');
+				tex = Paths.getSparrowAtlas('updateron/characters/WhittyWatchRed');
 				frames = tex;
 				animation.addByPrefix('idle', "Idle", 24);
 				animation.addByPrefix('singUP', 'Up', 24, false);
@@ -1698,7 +1698,7 @@ class Character extends FlxSprite
 				addOffset("singDOWN");
 				playAnim('idle');	
 			case 'blueSad':
-				tex = Paths.getSparrowAtlas('updateron/cachecharacters/vine_boom');
+				tex = Paths.getSparrowAtlas('updateron/characters/vine_boom');
 				frames = tex;
 				animation.addByPrefix('idle', "Idle", 24);
 				animation.addByPrefix('singUP', 'Up', 24, false);
@@ -1712,7 +1712,7 @@ class Character extends FlxSprite
 				addOffset("singDOWN");	
 				playAnim('idle');
 			case 'bf-g':
-				var tex = Paths.getSparrowAtlas('updateron/cachecharacters/grayfriend', 'shared');
+				var tex = Paths.getSparrowAtlas('updateron/cachecharacters/Grayfriend/grayfriend', 'shared');
 				frames = tex;
 
 				trace(tex.frames.length);
@@ -1755,7 +1755,7 @@ class Character extends FlxSprite
 				flipX = true;
 			case 'gf-g':
 				// GIRLFRIEND CODE
-				tex = Paths.getSparrowAtlas('updateron/cachecharacters/graygf');
+				tex = Paths.getSparrowAtlas('updateron/cachecharacters/Graygf/graygf');
 				frames = tex;
 				animation.addByPrefix('cheer', 'GF Cheer', 24, false);
 				animation.addByPrefix('singLEFT', 'GF left note', 24, false);
@@ -1803,7 +1803,7 @@ class Character extends FlxSprite
 
 				addOffset('idle', 0, -9);
 			case 'armand':
-				tex = Paths.getSparrowAtlas('updateron/cachecharacters/ArmandRonan');
+				tex = Paths.getSparrowAtlas('updateron/cachecharacters/Armand/ArmandRonan');
 				frames = tex;
 				animation.addByPrefix('idle', 'idle', 24, false);
 				animation.addByPrefix('altidle', 'altidle', 24, false);
@@ -1881,7 +1881,7 @@ class Character extends FlxSprite
 				addOffset("singUP", -36, 109);
 				playAnim('idle');
 			case 'shaggy':
-				tex = Paths.getSparrowAtlas('updateron/cachecharacters/shaggy');
+				tex = Paths.getSparrowAtlas('updateron/cachecharacters/Shaggy/shaggy');
 				frames = tex;
 				animation.addByPrefix('singDOWN', 'shaggy_down', 30, false);
 				animation.addByPrefix('idle', "shaggy_idle0", 30);
@@ -1921,7 +1921,7 @@ class Character extends FlxSprite
 				addOffset("stand");
 				playAnim('idle');
 			case 'tricky':
-				tex = Paths.getSparrowAtlas('updateron/cachecharacters/tricky', 'shared');
+				tex = Paths.getSparrowAtlas('updateron/cachecharacters/Tricky/tricky', 'shared');
 				frames = tex;
 				animation.addByPrefix('idle', 'Idle', 24);
 				animation.addByPrefix('singUP', 'Sing Up', 24);
@@ -1937,7 +1937,7 @@ class Character extends FlxSprite
 
 				playAnim('idle');
 			case 'himdrip':
-				tex = Paths.getSparrowAtlas('updateron/cachecharacters/himdrip');
+				tex = Paths.getSparrowAtlas('updateron/cachecharacters/Himdrip/himdrip');
 				frames = tex;
 				animation.addByPrefix('singDOWN', 'down', 24, false);
 				animation.addByPrefix('idle', "idle", 24);
@@ -1952,7 +1952,7 @@ class Character extends FlxSprite
 				addOffset("singUP", 180, 70);
 				playAnim('idle');
 			case 'meri':
-				tex = Paths.getSparrowAtlas('updateron/cachecharacters/Meri_assets');
+				tex = Paths.getSparrowAtlas('updateron/cachecharacters/Meri/Meri_assets');
 				frames = tex;
 				animation.addByPrefix('singDOWN', 'Meri Down', 24, false);
 				animation.addByPrefix('idle', "Meri Idle", 24);
@@ -1967,7 +1967,7 @@ class Character extends FlxSprite
 				addOffset("singUP", -12, 2);
 				playAnim('idle');
 			case 'neil':
-				tex = Paths.getSparrowAtlas('updateron/cachecharacters/neil');
+				tex = Paths.getSparrowAtlas('updateron/cachecharacters/Neil/neil');
 				frames = tex;
 				animation.addByPrefix('idle', "neil", 24);
 				

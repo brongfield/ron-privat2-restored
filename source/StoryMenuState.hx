@@ -84,6 +84,7 @@ class StoryMenuState extends MusicBeatState
 	{
 		#if windows
 		// Updating Discord Rich Presence
+		DiscordClient.currentIcon = "normal";
 		DiscordClient.changePresence("In the Story Mode Menu", null);
 		#end
 		

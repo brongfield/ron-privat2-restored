@@ -109,7 +109,8 @@ class BijuuPlayState extends MusicBeatState
 		}
 
 		#if windows
-		DiscordClient.changePresence("In the Freeplay Menu", null);
+		DiscordClient.currentIcon = "normal";
+		DiscordClient.changePresence("In the Freeplay Menu (Bijuu)", null);
 		#end
 
 		var isDebug:Bool = false;

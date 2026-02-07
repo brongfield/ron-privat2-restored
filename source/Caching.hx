@@ -60,7 +60,7 @@ class Caching extends MusicBeatState
 		if (FlxG.random.bool(1))
 			bgLoading = Paths.image('loadingolder');
 		kadeLogo = new FlxSprite(FlxG.width / 2, FlxG.height / 2).loadGraphic(bgLoading);
-		kadeLogo = new FlxSprite(FlxG.width / 2, FlxG.height / 2).loadGraphic(Paths.image('loading'));
+		// kadeLogo = new FlxSprite(FlxG.width / 2, FlxG.height / 2).loadGraphic(Paths.image('loading'));
 		kadeLogo.screenCenter();
 		kadeLogo.setGraphicSize(Std.int(kadeLogo.width * 0.5));
 		kadeLogo.alpha = 0;
